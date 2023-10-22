@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+
+<!--
+• User registration page: support standard information including user ID, password, nickname, email, gender, birthdate, etc.
+• Validation checks for input value, i.e., Password Policy and Duplicate User ID
+• Feedback message on validation failure and registration success/failure
+• Password stored in a database with password hashing
+• An admin doesn’t need to register an account.
+-->
+
 <html>
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -6,6 +15,10 @@
         <title>Train Ticket Selling System </title>
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
         <script src="scripts/user-registration.js"></script>
+        <!--
+        The line below is used to enable proper scaling on mobile device
+        -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles/nav.css">
         <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
     </head>
@@ -29,7 +42,7 @@
                 <div class="collapse navbar-collapse w-100 order-1 order-lg-0 dual-collapse2">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" href="#">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Features</a>
@@ -60,20 +73,70 @@
                             <a class="nav-link" href="#">Sign in</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Register</a>
+                            <a class="nav-link active" aria-current="page" href="#">Register</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <body>
-            <div class="container text-center pb-5">
-                top<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>last<br>
+            <div class="container text-left pb-5">
+                <form class="py-3">
+                    <div class="form-group py-1 row justify-content-center">
+                        <label for="user-name" class="col-lg-2 col-md-2 col-form-label">First name</label>
+                        <div class="col-lg-4 col-md-4">
+                            <input type="text" class="form-control" id="user-firstname" placeholder="Enter your first name">
+                        </div>
+                        <label for="user-name" class="col-lg-2 col-md-2 col-form-label">Last name</label>
+                        <div class="col-lg-4 col-md-4">
+                            <input type="text" class="form-control" id="user-lastname" placeholder="Enter your last name">
+                        </div>
+                    </div>
+                    <div class="form-group pt-1 pt-md-3 pt-lg-1 row justify-content-center">
+                        <label for="user-name" class="col-lg-2 col-md-2 col-form-label">Gender</label>
+                        <div class="col-lg-4 col-md-4">
+                            <input type="radio" onchange="calcalatePrice()" class="btn-check" name="gender" id="male" value="user-male" autocomplete="off">
+                            <label class="btn btn-outline-primary mb-2 ms-2 ms-lg-0 me-3" for="male">Male</label>
+                            <input type="radio" onchange="calcalatePrice()" class="btn-check btn-danger" name="gender" id="female" value="user-female" autocomplete="off">
+                            <label class="btn btn-outline-danger mb-2 ms-2 ms-lg-0" for="female">Female</label>
+                        </div>
+                        <label for="user-name" class="col-lg-2 col-md-2 col-form-label">Birthday</label>
+                        <div class="col-lg-4 col-md-4">
+                            <input type="date" class="form-control" id="user-birthday">
+                        </div>
+                    </div>
+                    <div class="form-group py-1 row justify-content-center">
+                        <label for="user-name" class="col-lg-2 col-form-label">Display name</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="user-name" placeholder="The name shown to other">
+                        </div>
+                    </div>
+                    <div class="form-group py-1 row justify-content-center">
+                        <label for="user-name" class="col-lg-2 col-form-label">Username</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="user-name" placeholder="Used to login to your account">
+                        </div>
+                    </div>
+                    <div class="form-group py-1 row justify-content-center">
+                        <label for="user-password" class="col-lg-2 col-form-label">Password</label>
+                        <div class="col-lg-10">
+                            <input type="password" class="form-control" id="user-password" placeholder="Enter your password">
+                        </div>
+                    </div>
+                    <div class="form-group py-1 row justify-content-center">
+                        <label for="user-email" class="col-lg-2 col-form-label">Email address</label>
+                        <div class="col-lg-10">
+                            <input type="email" class="form-control" id="user-email" placeholder="name@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group py-1 ms-auto">
+                        <button type="button" onclick="" class="btn btn-success my-3">Submit</button>
+                        <button type="reset" class="btn btn-danger my-3 mx-3">Reset</button>
+                    </div>
+                </form>
             </div>
             <button type="button" onclick="returnToTop()" class="btn btn-danger btn-circle btn-circle-l btn-lg" id="return-to-top"> <i class="bi bi-arrow-up"></i> </button>
-        </body>
         <footer class="bg-dark text-bg-dark flex py-auto fixed-bottom text-center">
             © 22019877d Yeung Pui Him - EIE4432 Group Project
         </footer>
     </body>
-</html>
+</html> 
