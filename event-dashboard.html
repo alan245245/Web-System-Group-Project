@@ -15,6 +15,7 @@
         <title>Train Ticket Selling System </title>
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
         <script src="scripts/user-registration.js"></script>
+        <script src="scripts/event-dashboard.js"></script>
         <!--
         The line below is used to enable proper scaling on mobile device
         -->
@@ -63,7 +64,6 @@
                 <div class="mx-auto order-0">
                     <a class="navbar-brand mx-auto" onclick="returnToTop()">Train Ticket Selling System</a>
                 </div>
-
                 <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -77,15 +77,15 @@
             </div>
         </nav>
             <div class="container pb-5">
-                <table class="table text-center table-striped">
+                <table class="table text-center table-striped" id="large-table">
                     <thead>
-                      <tr>
-                        <th scope="col">Train No.</th>
-                        <th scope="col">Departure Time</th>
-                        <th scope="col">Travel Time</th>
-                        <th scope="col">Arrival Time</th>
-                        <th scope="col">Price</th>
-                      </tr>
+                        <tr>
+                            <th scope="col">Train No.</th>
+                            <th scope="col">Departure Time</th>
+                            <th scope="col">Travel Time</th>
+                            <th scope="col">Arrival Time</th>
+                            <th scope="col">Price</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
@@ -96,8 +96,8 @@
                             <td><div class="pb-2">First Class Seat $100 <span class="badge text-bg-secondary" id="A001-first-available">Available seat: x</span> <button class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Buy Ticket</button></div>
                                 <div>Standard Seat $50 <span class="badge text-bg-secondary" id="A001-standard-available">Available seat: x</span> <button class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Buy Ticket</button></div>
                             </td>
-                      </tr>
-                      <tr>
+                        </tr>
+                        <tr>
                             <th scope="row">A002</th>
                             <td><p class="text-primary">13:00</p>Hong Kong</td>
                             <td><p>60 minutes</p><img src="assets/arrow.png" width="60px"></td>
@@ -107,7 +107,43 @@
                             </td>
                       </tr>
                     </tbody>
-                  </table>
+                </table>
+
+                <table class="table text-center table-striped table-bordered" id="small-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Train No.</th>
+                            <th scope="row">A001</th>
+                            <th scope="row">A002</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="col">Departure Time</th>
+                            <td><p class="text-primary">12:00</p>Hong Kong</td>
+                            <td><p class="text-primary">13:00</p>Hong Kong</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Travel Time</th>
+                            <td>20 minutes<img src="assets/vertical-arrow.png" width="30px"></td>
+                            <td>60 minutes<img src="assets/vertical-arrow.png" width="30px"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Arrival Time</th>
+                            <td><p class="text-primary">12:20</p>Shenzhen</td>
+                            <td><p class="text-primary">14:00</p>Guangzhou</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Price</th>
+                            <td><div class="pb-2">First Class Seat $100 <br><span class="badge text-bg-secondary" id="A001-first-available">Available seat: x</span> <button class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Buy Ticket</button></div>
+                                <div>Standard Seat $50 <br><span class="badge text-bg-secondary" id="A001-standard-available">Available seat: x</span> <button class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Buy Ticket</button></div>
+                            </td>
+                            <td><div class="pb-2">First Class Seat $300 <br><span class="badge text-bg-secondary" id="A002-first-available">Available seat: x</span> <button class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Buy Ticket</button></div>
+                                <div>Standard Seat $150 <br><span class="badge text-bg-secondary" id="A002-standard-available">Available seat: x</span> <button class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Buy Ticket</button></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <button type="button" onclick="returnToTop()" class="btn btn-danger btn-circle btn-circle-l btn-lg" id="return-to-top"> <i class="bi bi-arrow-up"></i> </button>
         <footer class="bg-dark text-bg-dark flex py-auto fixed-bottom text-center">
