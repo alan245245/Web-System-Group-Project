@@ -77,61 +77,37 @@
             </div>
         </nav>
             <div class="container pb-5">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 text-center" id="event-menu">
-                    <div class="col mt-3">
-                        <div class="card" style="width: 100%;">
-                            <img src="assets/buy-ticket.png" class="card-img-top" alt="Buy Ticket">
-                            <div class="card-body">
-                                <h5 class="card-title">Train Tickets</h5>
-                                <a href="#" class="btn btn-primary">Time Table</a><br>
-                                <a href="#" class="btn btn-primary mt-3">Fares</a><br>
-                                <a href="#" class="btn btn-primary mt-3">Ticket Purchase</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mt-3">
-                        <div class="card" style="width: 100%;">
-                            <img src="assets/my-tickets.png" class="card-img-top" alt="My Tickets">
-                            <div class="card-body">
-                                <h5 class="card-title">Ticket Management</h5>
-                                <a href="#" class="btn btn-primary">My tickets</a><br>
-                                <a href="#" class="btn btn-primary mt-3">Waitlist</a><br>
-                                <a href="#" class="btn btn-primary mt-3">Cancel Ticket</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mt-3">
-                        <div class="card" style="width: 100%;">
-                            <img src="assets/route-map.png" class="card-img-top" alt="Route Map">
-                            <div class="card-body">
-                                <h5 class="card-title">Trip Information</h5>
-                                <a href="#" class="btn btn-primary">Train Route Map</a><br>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mt-3">
-                        <div class="card" style="width: 100%;">
-                            <img src="assets/service.png" class="card-img-top" alt="Service and Facilities">
-                            <div class="card-body">
-                                <h5 class="card-title">Services and Facilities</h5>
-                                <a href="#" class="btn btn-primary">Station's Facilities</a><br>
-                                <a href="#" class="btn btn-primary mt-3">Train's Facilities</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mt-3">
-                        <div class="card" style="width: 100%;">
-                            <img src="assets/contact-us.png" class="card-img-top" alt="Contact Us">
-                            <div class="card-body">
-                                <h5 class="card-title">Contact Us</h5>
-                                <p class="card-text">Phone: +852-xxxx-xxxx</p>
-                                <p class="card-text">Email: xxxx@example.com</p>
-                                <a href="#" class="btn btn-primary">Email us</a><br>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
+                <table class="table text-center table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Train No.</th>
+                        <th scope="col">Departure Time</th>
+                        <th scope="col">Travel Time</th>
+                        <th scope="col">Arrival Time</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">A001</th>
+                            <td><p class="text-primary">12:00</p>Hong Kong</td>
+                            <td><p>20 minutes</p><img src="assets/arrow.png" width="60px"></td>
+                            <td><p class="text-primary">12:20</p>Shenzhen</td>
+                            <td><div class="pb-2">First Class Seat $100 <button class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Buy Ticket</button></div>
+                                <div>Standard Seat $50 <button class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Buy Ticket</button></div>
+                            </td>
+                      </tr>
+                      <tr>
+                            <th scope="row">A002</th>
+                            <td><p class="text-primary">13:00</p>Hong Kong</td>
+                            <td><p>60 minutes</p><img src="assets/arrow.png" width="60px"></td>
+                            <td><p class="text-primary">14:00</p>Guangzhou</td>
+                            <td><div class="pb-2">First Class Seat $300 <button class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Buy Ticket</button></div>
+                                <div>Standard Seat $150 <button class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Buy Ticket</button></div>
+                            </td>
+                      </tr>
+                    </tbody>
+                  </table>
             </div>
             <button type="button" onclick="returnToTop()" class="btn btn-danger btn-circle btn-circle-l btn-lg" id="return-to-top"> <i class="bi bi-arrow-up"></i> </button>
         <footer class="bg-dark text-bg-dark flex py-auto fixed-bottom text-center">
