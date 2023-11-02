@@ -10,7 +10,7 @@ function validateForm() {
     let username;
     let password;
     let email;
-    let invalid = false;
+    let valid = true;
 
     try {
         const ele = $("#user-firstname");
@@ -18,11 +18,15 @@ function validateForm() {
         firstName = firstName.trim();
         if (firstName == '') {
             // Invalid: Missing input
-            invalid = true;
+            ele.removeClass("is-valid");
+            ele.addClass("is-invalid");
+            valid = false;
+        } else {
+            ele.removeClass("is-invalid");
+            ele.addClass("is-valid");
         }
     } catch (error) {
         alert(error.message);
-        return false;
     }
 
     try {
@@ -31,22 +35,34 @@ function validateForm() {
         lastName = lastName.trim();
         if (lastName == '') {
             // Invalid: Missing input
-            invalid = true;
+            ele.removeClass("is-valid");
+            ele.addClass("is-invalid");
+            valid = false;
+        } else {
+            ele.removeClass("is-invalid");
+            ele.addClass("is-valid");
         }
     } catch (error) {
         alert(error.message);
-        return false;
     }
 
     try {
         gender = document.querySelector('input[name="gender"]:checked').value;
+        const ele = $("#female");
         if (gender == '') {
             // Invalid: Missing input
-            invalid = true;
+            ele.removeClass("is-valid");
+            ele.addClass("is-invalid");
+            valid = false;
+        } else {
+            ele.removeClass("is-invalid");
+            ele.addClass("is-valid");
         }
     } catch (error) {
-        alert(error.message);
-        return false;
+        const ele = $("#female");
+        ele.removeClass("is-valid");
+        ele.addClass("is-invalid");
+        valid = false;
     }
 
     try {
@@ -55,11 +71,18 @@ function validateForm() {
         birthday = birthday;
         if (birthday == '') {
             // Invalid: Missing input
-            invalid = true;
+            ele.removeClass("is-valid");
+            ele.addClass("is-invalid");
+            valid = false;
+        } else {
+            ele.removeClass("is-invalid");
+            ele.addClass("is-valid");
         }
     } catch (error) {
-        alert(error.message);
-        return false;
+        const ele = $("#user-birthday");
+        ele.removeClass("is-valid");
+        ele.addClass("is-invalid");
+        valid = false;
     }
 
     
@@ -69,24 +92,43 @@ function validateForm() {
         username = username;
         if (username == '') {
             // Invalid: Missing input
-            invalid = true;
+            ele.removeClass("is-valid");
+            ele.addClass("is-invalid");
+            valid = false;
+        } else {
+            ele.removeClass("is-invalid");
+            ele.addClass("is-valid");
         }
     } catch (error) {
-        alert(error.message);
-        return false;
+        const ele = $("#user-name");
+        ele.removeClass("is-valid");
+        ele.addClass("is-invalid");
+        valid = false;
     }
 
     try {
         const ele = $("#user-password");
+        const msg = $("#invalid-feedback-password");
         password = ele.val();
         password = password;
         if (password == '') {
             // Invalid: Missing input
-            invalid = true;
+            ele.removeClass("is-valid");
+            ele.addClass("is-invalid");
+            valid = false;
+        } else if (password.length < 8) {
+            ele.removeClass("is-valid");
+            ele.addClass("is-invalid");
+            msg.text("Your password is too short")
+        } else {
+            ele.removeClass("is-invalid");
+            ele.addClass("is-valid");
         }
     } catch (error) {
-        alert(error.message);
-        return false;
+        const ele = $("#user-password");
+        ele.removeClass("is-valid");
+        ele.addClass("is-invalid");
+        valid = false;
     }
 
     try {
@@ -95,10 +137,16 @@ function validateForm() {
         email = email.trim();
         if (email == '') {
             // Invalid: Missing input
-            invalid = true;
+            ele.removeClass("is-valid");
+            ele.addClass("is-invalid");
+            valid = false;
+        } else {
+            ele.removeClass("is-invalid");
+            ele.addClass("is-valid");
         }
     } catch (error) {
         alert(error.message);
-        return false;
     }
+
+    return valid;
 }

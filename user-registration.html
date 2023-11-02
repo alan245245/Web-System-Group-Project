@@ -87,41 +87,56 @@
                         <label for="user-firstname" class="col-lg-2 col-md-2 col-form-label">First name</label>
                         <div class="col-lg-4 col-md-4">
                             <input type="text" class="form-control" id="user-firstname" placeholder="Enter your first name">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
                         </div>
                         <label for="user-lastname" class="col-lg-2 col-md-2 col-form-label">Last name</label>
                         <div class="col-lg-4 col-md-4">
                             <input type="text" class="form-control" id="user-lastname" placeholder="Enter your last name">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
                         </div>
                     </div>
                     <div class="form-group pt-1 pt-md-3 pt-lg-1 row justify-content-center">
                         <label for="gender" class="col-lg-2 col-md-2 col-form-label">Gender</label>
                         <div class="col-lg-4 col-md-4">
-                            <input type="radio" class="btn-check" name="gender" id="male" value="user-male" autocomplete="off">
+                            <input type="radio" class="btn-check form-check-input" name="gender" id="male" value="M" autocomplete="off">
                             <label class="btn btn-outline-primary mb-2 ms-2 ms-lg-0 me-3" for="male">Male</label>
-                            <input type="radio" class="btn-check btn-danger" name="gender" id="female" value="user-female" autocomplete="off">
+                            <input type="radio" class="btn-check btn-danger form-check-input" name="gender" id="female" value="F" autocomplete="off">
                             <label class="btn btn-outline-danger mb-2 ms-2 ms-lg-0" for="female">Female</label>
+                            <div class="invalid-feedback">
+                                Please select a gender.
+                            </div>
                         </div>
                         <label for="user-birthday" class="col-lg-2 col-md-2 col-form-label">Birthday</label>
                         <div class="col-lg-4 col-md-4">
                             <input type="date" class="form-control" id="user-birthday">
+                            <div class="invalid-feedback">
+                                Please select your birthday
+                            </div>
                         </div>
                     </div>
                     <div class="form-group py-1 row">
                         <label for="user-name" class="col-lg-2 col-form-label">Username</label>
                         <div class="col-lg-10">
                             <input type="text" class="form-control" id="user-name" placeholder="Used to login to your account">
+                            <div class="invalid-feedback" id="invalid-feedback-username"></div>
                         </div>
                     </div>
                     <div class="form-group py-1 row">
                         <label for="user-password" class="col-lg-2 col-form-label">Password</label>
                         <div class="col-lg-10">
                             <input type="password" class="form-control" id="user-password" placeholder="Enter your password">
+                            <div class="invalid-feedback" id="invalid-feedback-password"></div>
                         </div>
                     </div>
                     <div class="form-group py-1 row">
                         <label for="user-email" class="col-lg-2 col-form-label">Email</label>
                         <div class="col-lg-10">
                             <input type="email" class="form-control" id="user-email" placeholder="name@example.com">
+                            <div class="invalid-feedback" id="invalid-feedback-email"></div>
                         </div>
                     </div>
                     <div class="form-group py-1 ms-auto">
