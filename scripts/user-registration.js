@@ -1,7 +1,15 @@
 $.when($(document).ready).then(function() {
     $("#user-password").on("input", function() {
         updateMeter();
-    })
+    });
+
+    $("#user-password").on("focus", function() {
+        $("#password-suggestion").addClass("d-flex").removeClass("d-none");
+    });
+
+    $("#user-password").on("blur", function() {
+        $("#password-suggestion").addClass("d-none").removeClass("d-flex");
+    });
 })
 
 
@@ -113,16 +121,16 @@ function validateForm() {
         const ele = $("#user-password");
         const msg = $("#invalid-feedback-password");
         password = ele.val();
-        password = password;
+        password = password.trim();
+        const strength = calculatePasswordStrength(password);
         if (password == '') {
             // Invalid: Missing input
             ele.removeClass("is-valid");
             ele.addClass("is-invalid");
             valid = false;
-        } else if (password.length < 8) {
+        } else if (strength <= 2) {
             ele.removeClass("is-valid");
             ele.addClass("is-invalid");
-            msg.text("Your password is too short")
         } else {
             ele.removeClass("is-invalid");
             ele.addClass("is-valid");
@@ -137,12 +145,16 @@ function validateForm() {
     try {
         const ele = $("#user-email");
         email = ele.val();
-        email = email.trim();
+        email = email.toLowerCase().trim();
         if (email == '') {
             // Invalid: Missing input
             ele.removeClass("is-valid");
             ele.addClass("is-invalid");
             valid = false;
+        } else if (!email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+            // Invalid: Invalid email
+            ele.removeClass("is-valid");
+            ele.addClass("is-invalid");
         } else {
             ele.removeClass("is-invalid");
             ele.addClass("is-valid");
@@ -157,7 +169,7 @@ function validateForm() {
 function updateMeter() {
     const ele = $("#user-password");
     const meterSections = document.querySelectorAll('.meter-section');
-    password = ele.val();
+    password = ele.val().trim();
     
     const strength = calculatePasswordStrength(password);
 
