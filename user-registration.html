@@ -16,6 +16,34 @@
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
         <script src="scripts/nav-bar.js"></script>
         <script src="scripts/user-registration.js"></script>
+        <style>
+            .password-meter {
+                display: flex;
+                height: 5px;
+                margin-top: 10px;
+            }
+
+            .meter-section {
+                flex: 1;
+                background-color: #ddd;
+            }
+
+            .weak {
+                background-color: #ff4d4d;
+            }
+
+            .medium {
+                background-color: #ffd633;
+            }
+
+            .strong {
+                background-color: #00b300;
+            }
+
+            .very-strong {
+                background-color: #009900;
+            }
+        </style>
         <!--
         The line below is used to enable proper scaling on mobile device
         -->
@@ -129,6 +157,12 @@
                         <label for="user-password" class="col-lg-2 col-form-label">Password</label>
                         <div class="col-lg-10">
                             <input type="password" class="form-control" id="user-password" placeholder="Enter your password">
+                            <div class="password-meter">
+                                <div class="meter-section rounded me-2"></div>
+                                <div class="meter-section rounded me-2"></div>
+                                <div class="meter-section rounded me-2"></div>
+                                <div class="meter-section rounded"></div>
+                            </div>
                             <div class="invalid-feedback" id="invalid-feedback-password"></div>
                         </div>
                     </div>
