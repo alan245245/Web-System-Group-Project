@@ -1,15 +1,14 @@
-$(document).ready(function() {
-})
+$(document).ready(function () {});
 var lastScrollTop = 0;
-$(window).scroll(function() {
+$(window).scroll(function () {
     let mybutton = document.getElementById("return-to-top");
     var st = $(this).scrollTop();
-    if (st > lastScrollTop){
+    if (st > lastScrollTop) {
         // downscroll code
-      $('nav').addClass('transparent');
+        $("nav").addClass("transparent");
     } else {
-       // upscroll code
-      $('nav').removeClass('transparent');
+        // upscroll code
+        $("nav").removeClass("transparent");
     }
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
         mybutton.style.display = "block";

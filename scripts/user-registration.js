@@ -1,19 +1,19 @@
-$.when($(document).ready).then(function() {
+$.when($(document).ready).then(function () {
     // When the user input the password, update the strength meter
-    $("#user-password").on("input", function() {
+    $("#user-password").on("input", function () {
         updateMeter();
     });
 
     // Show the password suggestions when focused
-    $("#user-password").on("focus", function() {
+    $("#user-password").on("focus", function () {
         $("#password-suggestion").addClass("d-flex").removeClass("d-none");
     });
-    
+
     // Hide the password suggestions when not focused
-    $("#user-password").on("blur", function() {
+    $("#user-password").on("blur", function () {
         $("#password-suggestion").addClass("d-none").removeClass("d-flex");
     });
-})
+});
 
 /**
  * Validate the input field of user registration
@@ -40,7 +40,7 @@ function validateForm(event) {
         const ele = $("#user-firstname");
         firstName = ele.val();
         firstName = firstName.trim();
-        if (firstName == '') {
+        if (firstName == "") {
             // Invalid: Missing input
             ele.removeClass("is-valid").addClass("is-invalid");
             valid = false;
@@ -63,7 +63,7 @@ function validateForm(event) {
         const ele = $("#user-lastname");
         lastName = ele.val();
         lastName = lastName.trim();
-        if (lastName == '') {
+        if (lastName == "") {
             // Invalid: Missing input
             ele.removeClass("is-valid").addClass("is-invalid");
             valid = false;
@@ -85,7 +85,7 @@ function validateForm(event) {
     try {
         gender = document.querySelector('input[name="gender"]:checked').value;
         const ele = $("#female");
-        if (gender == '') {
+        if (gender == "") {
             // Invalid: Missing input
             ele.removeClass("is-valid").addClass("is-invalid");
             valid = false;
@@ -100,7 +100,6 @@ function validateForm(event) {
         valid = false;
     }
 
-    
     /* 
     Input checking for birthday 
     - Check for no input
@@ -109,7 +108,7 @@ function validateForm(event) {
         const ele = $("#user-birthday");
         birthday = ele.val();
         birthday = birthday;
-        if (birthday == '') {
+        if (birthday == "") {
             // Invalid: Missing input
             ele.removeClass("is-valid").addClass("is-invalid");
             valid = false;
@@ -133,7 +132,7 @@ function validateForm(event) {
         const ele = $("#user-name");
         username = ele.val();
         username = username;
-        if (username == '') {
+        if (username == "") {
             // Invalid: Missing input
             ele.removeClass("is-valid").addClass("is-invalid");
             valid = false;
@@ -160,7 +159,7 @@ function validateForm(event) {
         password = ele.val();
         password = password.trim();
         const strength = calculatePasswordStrength(password);
-        if (password == '') {
+        if (password == "") {
             // Invalid: Missing input
             ele.removeClass("is-valid").addClass("is-invalid");
             valid = false;
@@ -187,11 +186,15 @@ function validateForm(event) {
         const ele = $("#user-email");
         email = ele.val();
         email = email.toLowerCase().trim();
-        if (email == '') {
+        if (email == "") {
             // Invalid: Missing input
             ele.removeClass("is-valid").addClass("is-invalid");
             valid = false;
-        } else if (!email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+        } else if (
+            !email.match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            )
+        ) {
             // Invalid: Invalid email pattern
             ele.removeClass("is-valid").addClass("is-invalid");
         } else {
@@ -217,28 +220,28 @@ function validateForm(event) {
  */
 function updateMeter() {
     const ele = $("#user-password");
-    const meterSections = document.querySelectorAll('.meter-section');
+    const meterSections = document.querySelectorAll(".meter-section");
     password = ele.val().trim();
-    
+
     const strength = calculatePasswordStrength(password);
 
     // Remove all strength classes
     meterSections.forEach((section) => {
-        section.classList.remove('weak', 'medium', 'strong', 'very-strong');
+        section.classList.remove("weak", "medium", "strong", "very-strong");
     });
 
     // Add the appropriate strength class based on the strength value
     if (strength >= 1) {
-        meterSections[0].classList.add('weak');
+        meterSections[0].classList.add("weak");
     }
     if (strength >= 2) {
-        meterSections[1].classList.add('medium');
+        meterSections[1].classList.add("medium");
     }
     if (strength >= 3) {
-        meterSections[2].classList.add('strong');
+        meterSections[2].classList.add("strong");
     }
     if (strength >= 4) {
-        meterSections[3].classList.add('very-strong');
+        meterSections[3].classList.add("very-strong");
     }
 }
 
@@ -265,7 +268,7 @@ function calculatePasswordStrength(pw) {
     if (/[A-Z]/.test(password)) {
         strength += uppercaseWeight;
     }
-    
+
     // Password strength based on lowercase letters
     if (/[a-z]/.test(password)) {
         strength += lowercaseWeight;
