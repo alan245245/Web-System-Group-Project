@@ -294,3 +294,50 @@ function calculatePasswordStrength(pw) {
     return strength;
 }
 
+/**
+ * Trigger by register button to validate and send request to server
+ * @param {*} event
+ * @returns
+ */
+async function register(event) {
+    event.preventDefault();
+    // Validate registration form, return if the form is invalid
+    if (!validateForm()) return;
+
+    const firstName = $("#user-firstname").val();
+    const lastName = $("#user-lastname").val();
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+    const birthday = $("#user-birthday").val();
+    const username = $("#user-name").val();
+    let password = $("#user-password").val();
+    const email = $("#user-email").val();
+
+    const user = {
+        firstName: firstName,
+        lastName: lastName,
+        gender: gender,
+        birthday: birthday,
+        username: username,
+        password: password,
+        email: email,
+    };
+
+    $.post(
+        "auth/register",
+        user,
+        function (response) {
+            const jsonObject = JSON.parse(response);
+            if (jsonObject.status == "success") {
+                alert(`Welcome, ${jsonObject.username}!\nYou can login with your account now!`);
+            }
+        },
+        "json"
+    ).fail(function (response) {
+        const jsonObject = JSON.parse(response.responseJSON);
+        if (jsonObject.status == "failed" && jsonObject.message != "") {
+            alert(`${jsonObject.message}`);
+        } else {
+            alert(`An unknown error has occured`);
+        }
+    });
+}
