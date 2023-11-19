@@ -32,6 +32,10 @@ app.use("/styles", express.static(path.join("node_modules/bootstrap-icons/font")
 app.use("/scripts", express.static(path.join("node_modules/bootstrap/dist/js")));
 app.use("/scripts", express.static(path.join("node_modules/jquery/dist")));
 
+app.get("/", (req, res) => {
+    res.redirect("event-dashboard.html");
+});
+
 app.get("/event-dashboard", (req, res) => {
     res.redirect("event-dashboard.html");
 });
