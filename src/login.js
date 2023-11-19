@@ -14,17 +14,12 @@ app.use(form.none());
 route.post("/login", async (req, res) => {
     console.log(req.body);
     const user = await users.validate_user(req.body.username, req.body.password);
-    if ((await user) && (await user.enabled)) {
+    if (user) {
         req.session.logged = true;
         req.session.username = user.username;
         req.session.role = user.role;
         req.session.timestamp = new Date();
-        res.json(JSON.stringify({ status: "success", user: { username: `${user.username}`, role: `${user.role}` } }));
-    } else if (user && !user.enabled) {
-        req.session.logged = false;
-        res.status(401).json(
-            JSON.stringify({ status: "failed", message: `User \`${user.username}\` is current disabled` })
-        );
+        res.json(JSON.stringify({ status: "success", username: user.username }));
     } else {
         req.session.logged = false;
         res.status(401).json(JSON.stringify({ status: `failed`, message: `Incorrect username or password` }));

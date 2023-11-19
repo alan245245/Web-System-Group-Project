@@ -39,7 +39,6 @@ async function validate_user(username, password) {
     await sha256(password)
         .then((result) => (hash = result))
         .catch((error) => console.log("Error", error));
-
     try {
         const users = client.db("projectdb").collection("user");
         const findUser = await users.findOne({ username: username, password: hash });
