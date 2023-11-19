@@ -21,8 +21,7 @@ $.when($(document).ready).then(function () {
  * @param event of the form submit
  * @returns Bolleans - True when the form has no error detected
  */
-function validateForm(event) {
-    event.preventDefault();
+function validateForm() {
     let firstName;
     let lastName;
     let gender;
@@ -136,8 +135,6 @@ function validateForm(event) {
             // Invalid: Missing input
             ele.removeClass("is-valid").addClass("is-invalid");
             valid = false;
-        } else if (false) {
-            // Invalid: Duplicated username
         } else {
             ele.removeClass("is-invalid").addClass("is-valid");
         }
@@ -152,12 +149,14 @@ function validateForm(event) {
     Input checking for password 
     - Check for no input
     - Check for password strength
+    - Check for not match password
     */
     try {
         const ele = $("#user-password");
-        const msg = $("#invalid-feedback-password");
         password = ele.val();
         password = password.trim();
+        passwordrp = $("#user-passwordrp").val();
+        passwordrp = passwordrp.trim();
         const strength = calculatePasswordStrength(password);
         if (password == "") {
             // Invalid: Missing input
@@ -166,9 +165,16 @@ function validateForm(event) {
         } else if (strength <= 2) {
             // Invalid: Password not strong enough
             ele.removeClass("is-valid").addClass("is-invalid");
+            valid = false;
+        } else if (password != passwordrp) {
+            // Invalid: Password does not match
+            ele.removeClass("is-invalid").addClass("is-valid");
+            $("#user-passwordrp").removeClass("is-valid").addClass("is-invalid");
+            valid = false;
         } else {
             // Valid
             ele.removeClass("is-invalid").addClass("is-valid");
+            $("#user-passwordrp").removeClass("is-invalid").addClass("is-valid");
         }
     } catch (error) {
         // Invalid: Fetch error
@@ -197,6 +203,7 @@ function validateForm(event) {
         ) {
             // Invalid: Invalid email pattern
             ele.removeClass("is-valid").addClass("is-invalid");
+            valid = false;
         } else {
             // Valid
             ele.removeClass("is-invalid").addClass("is-valid");
@@ -208,7 +215,7 @@ function validateForm(event) {
         valid = false;
     }
 
-    // Function return valid if no error is detected
+    // Function return true if no error is detected
     return valid;
 }
 
@@ -286,3 +293,4 @@ function calculatePasswordStrength(pw) {
 
     return strength;
 }
+

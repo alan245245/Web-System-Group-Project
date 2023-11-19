@@ -1,0 +1,338 @@
+<!doctype html>
+
+<html>
+    <head>
+        <title>Ticket Booking</title>
+        <!--
+            Compulsary script
+        -->
+        <script src="scripts/bootstrap.bundle.min.js"></script>
+        <script src="scripts/jquery.min.js"></script>
+        <script src="scripts/nav-bar.js"></script>
+        <!--
+            Page specific script
+        -->
+        <script src=""></script>
+        <!--
+        The line below is used to enable proper scaling on mobile device
+        -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--
+            Compulsary stylesheet
+        -->
+        <link rel="stylesheet" href="styles/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles/nav.css" />
+        <link rel="stylesheet" href="styles/bootstrap-icons.css" />
+        <!--
+            Page specific stylesheet
+        -->
+        <style>
+            .available-seat {
+                fill: green;
+                stroke-width: 1;
+                stroke: black;
+                cursor: pointer;
+            }
+            .booked-seat {
+                fill: red;
+                stroke-width: 1;
+                stroke: black;
+                cursor: not-allowed;
+            }
+            .seat-number {
+                pointer-events: none;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <div class="container-fluid">
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target=".dual-collapse2"
+                    aria-controls="dual-collapse2"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse w-100 order-1 order-lg-0 dual-collapse2">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="event-dashboard.html">Event Dashboard</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Admin Only
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Seat Management</a></li>
+                                <li><a class="dropdown-item" href="#">Event Management</a></li>
+                                <li><a class="dropdown-item" href="#">User Account Management</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mx-auto order-0">
+                    <a class="navbar-brand mx-auto" onclick="returnToTop()">Train Ticket Selling System</a>
+                </div>
+
+                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sign in</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="user-registration.html">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container pb-5">
+            <h1 class="text-center">
+                Currently booking:<br /><span id="train-id" class="badge text-bg-primary">A001</span>
+                <span id="train-info" class="badge text-bg-secondary">Hong Kong to Shenzhen</span>
+            </h1>
+            <h2 class="text-center">
+                Departure Time: <span class="badge text-bg-primary">12:00</span>
+                <div class="d-inline">
+                    <label for="seat-type">Seat Class:</label>
+                    <select class="form-select" aria-label="Standard Seat" id="seat-type" name="seat-type">
+                        <option selected value="standard">Standard Seat</option>
+                        <option value="first-class">First Class Seat</option>
+                    </select>
+                </div>
+            </h2>
+            <div class="text-center">
+                <svg width="250" height="250">
+                    <rect x="0" y="0" width="50" height="50" id="1" class="available-seat" />
+                    <text
+                        x="25"
+                        y="25"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        1
+                    </text>
+                    <rect x="50" y="0" width="50" height="50" id="2" class="available-seat" />
+                    <text
+                        x="75"
+                        y="25"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        2
+                    </text>
+                    <rect x="150" y="0" width="50" height="50" id="3" class="available-seat" />
+                    <text
+                        x="175"
+                        y="25"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        3
+                    </text>
+                    <rect x="200" y="0" width="50" height="50" id="4" class="booked-seat" />
+                    <text
+                        x="225"
+                        y="25"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        4
+                    </text>
+                    <rect x="0" y="50" width="50" height="50" id="5" class="available-seat" />
+                    <text
+                        x="25"
+                        y="75"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        5
+                    </text>
+                    <rect x="50" y="50" width="50" height="50" id="6" class="available-seat" />
+                    <text
+                        x="75"
+                        y="75"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        6
+                    </text>
+                    <rect x="150" y="50" width="50" height="50" id="7" class="available-seat" />
+                    <text
+                        x="175"
+                        y="75"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        7
+                    </text>
+                    <rect x="200" y="50" width="50" height="50" id="8" class="available-seat" />
+                    <text
+                        x="225"
+                        y="75"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        8
+                    </text>
+                    <rect x="0" y="100" width="50" height="50" id="9" class="available-seat" />
+                    <text
+                        x="25"
+                        y="125"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        9
+                    </text>
+                    <rect x="50" y="100" width="50" height="50" id="10" class="available-seat" />
+                    <text
+                        x="75"
+                        y="125"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        10
+                    </text>
+                    <rect x="150" y="100" width="50" height="50" id="11" class="available-seat" />
+                    <text
+                        x="175"
+                        y="125"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        11
+                    </text>
+                    <rect x="200" y="100" width="50" height="50" id="12" class="available-seat" />
+                    <text
+                        x="225"
+                        y="125"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        12
+                    </text>
+                    <rect x="0" y="150" width="50" height="50" id="13" class="available-seat" />
+                    <text
+                        x="25"
+                        y="175"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        13
+                    </text>
+                    <rect x="50" y="150" width="50" height="50" id="14" class="available-seat" />
+                    <text
+                        x="75"
+                        y="175"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        14
+                    </text>
+                    <rect x="150" y="150" width="50" height="50" id="15" class="available-seat" />
+                    <text
+                        x="175"
+                        y="175"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        15
+                    </text>
+                    <rect x="200" y="150" width="50" height="50" id="16" class="available-seat" />
+                    <text
+                        x="225"
+                        y="175"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        16
+                    </text>
+                    <rect x="0" y="200" width="50" height="50" id="17" class="available-seat" />
+                    <text
+                        x="25"
+                        y="225"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        17
+                    </text>
+                    <rect x="50" y="200" width="50" height="50" id="18" class="available-seat" />
+                    <text
+                        x="75"
+                        y="225"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        18
+                    </text>
+                    <rect x="150" y="200" width="50" height="50" id="19" class="available-seat" />
+                    <text
+                        x="175"
+                        y="225"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        19
+                    </text>
+                    <rect x="200" y="200" width="50" height="50" id="20" class="available-seat" />
+                    <text
+                        x="225"
+                        y="225"
+                        fill="white"
+                        text-anchor="middle"
+                        alignment-baseline="central"
+                        class="seat-number">
+                        20
+                    </text>
+                </svg>
+            </div>
+            <div id="selected-seat" class="text-center fs-2 fw-bold">Click a seat to book.</div>
+            <div class="d-none text-center" id="confirm-buttons">
+                <button class="btn btn-primary" id="confirm">Confirm</button>
+                <button class="btn btn-secondary" id="cancel">Cancel</button>
+            </div>
+            <hr />
+            <div class="fs-2 fw-bold">Price: $<span id="price">0</span></div>
+        </div>
+        <button
+            type="button"
+            onclick="returnToTop()"
+            class="btn btn-danger btn-circle btn-circle-l btn-lg"
+            id="return-to-top">
+            <i class="bi bi-arrow-up"></i>
+        </button>
+        <footer class="bg-dark text-bg-dark flex py-auto fixed-bottom text-center"></footer>
+    </body>
+</html>

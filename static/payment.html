@@ -1,45 +1,44 @@
-<!DOCTYPE html>
-
-<!--
-• User registration page: support standard information including user ID, password, nickname, email, gender, birthdate, etc.
-• Validation checks for input value, i.e., Password Policy and Duplicate User ID
-• Feedback message on validation failure and registration success/failure
-• Password stored in a database with password hashing
-• An admin doesn’t need to register an account.
--->
+<!doctype html>
 
 <html>
     <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        <title>Train Ticket Selling System </title>
-        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <title>Payment</title>
         <!--
-        Insert JavaScript if needed below
+            Compulsary script
+        -->
+        <script src="scripts/bootstrap.bundle.min.js"></script>
+        <script src="scripts/jquery.min.js"></script>
+        <script src="scripts/nav-bar.js"></script>
+        <!--
+            Page specific script
         -->
         <script src=""></script>
         <!--
         The line below is used to enable proper scaling on mobile device
         -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles/nav.css">
-        <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--
+            Compulsary stylesheet
+        -->
+        <link rel="stylesheet" href="styles/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles/nav.css" />
+        <link rel="stylesheet" href="styles/bootstrap-icons.css" />
+        <!--
+            Page specific stylesheet
+        -->
+        <link rel="stylesheet" href="" />
     </head>
     <body>
-        <!--
-        <header>
-            <h1 class="p-4 bg-dark text-bg-dark text-center">Train Ticket Selling System</h1>
-        </header>
-        -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <div class="container-fluid">
-                <!--
-                <a class="navbar-brand" href="#">Train Ticket Selling System</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".dual-collapse2" aria-controls="dual-collapse2" aria-expanded="false" aria-label="Toggle navigation">
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target=".dual-collapse2"
+                    aria-controls="dual-collapse2"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse w-100 order-1 order-lg-0 dual-collapse2">
@@ -51,7 +50,12 @@
                             <a class="nav-link" href="#">Event Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
                                 Admin Only
                             </a>
                             <ul class="dropdown-menu">
@@ -81,29 +85,16 @@
         </nav>
         <div class="container pb-5">
             <section class="d-flex justify-content-center">
-                <div class="card" style="width: 24rem;">
-                    <div class="card-header">
-                        Selected Seat
-                    </div>
+                <div class="card" style="width: 24rem">
+                    <div class="card-header">Selected Seat</div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-auto d-block d-md-flex py-2">
-                                Train id: A001
-                            </div>
+                            <div class="col-auto d-block d-md-flex py-2">Train id: A001</div>
                         </div>
-                        <div class="col d-block d-md-flex py-2">
-                            Location: Hong Kong to Shenzhen
-                        </div>
-                        <div class="col d-block d-md-flex py-2">
-                            Departure Time: 12:00
-                        </div>
-                        <div class="col d-block d-md-flex py-2">
-                            Seat Type: Standard Seat
-                        </div>
-                        <div class="col d-block d-md-flex py-2">
-                            Seat Number: 7, 8
-                        </div>
-                        
+                        <div class="col d-block d-md-flex py-2">Location: Hong Kong to Shenzhen</div>
+                        <div class="col d-block d-md-flex py-2">Departure Time: 12:00</div>
+                        <div class="col d-block d-md-flex py-2">Seat Type: Standard Seat</div>
+                        <div class="col d-block d-md-flex py-2">Seat Number: 7, 8</div>
                     </div>
                 </div>
             </section>
@@ -114,41 +105,43 @@
                 Selected Seat: <span class="badge text-bg-secondary">Standard Seat</span> <span class="badge text-bg-primary">7, 8</span>
             </div>
             -->
-            <hr>
-            <div class="fs-2 fw-bold">
-                Price: $<span id="price">100</span>
-            </div>
+            <hr />
+            <div class="fs-2 fw-bold">Price: $<span id="price">100</span></div>
             <div>
                 <label for="payment-method">Payment Method: </label>
                 <select id="payment-method">
                     <option selected>Credit Card</option>
                 </select>
             </div>
-            <hr>
+            <hr />
             <form id="payment-info">
                 <div class="mb-3">
                     <label for="card-id" class="form-label">Card ID:</label>
-                    <input type="text" class="form-control" id="card-id">
+                    <input type="text" class="form-control" id="card-id" />
                 </div>
                 <div class="mb-3">
                     <label for="card-holder-name" class="form-label">Card Holder Name:</label>
-                    <input type="text" class="form-control" id="card-holder-name">
+                    <input type="text" class="form-control" id="card-holder-name" />
                 </div>
                 <div class="mb-3">
                     <label for="security-code" class="form-label">Security Code:</label>
-                    <input type="text" class="form-control" id="security-code">
+                    <input type="text" class="form-control" id="security-code" />
                 </div>
                 <div class="mb-3">
                     <label for="expire-date" class="form-label">Card Expire Date:</label>
-                    <input type="date" class="form-control" id="expire-date">
+                    <input type="date" class="form-control" id="expire-date" />
                 </div>
                 <button type="submit" class="btn btn-primary">Confirm</button>
                 <button type="reset" class="btn btn-secondary">reset</button>
             </form>
         </div>
-        <button type="button" onclick="returnToTop()" class="btn btn-danger btn-circle btn-circle-l btn-lg" id="return-to-top"> <i class="bi bi-arrow-up"></i> </button>
-        <footer class="bg-dark text-bg-dark flex py-auto fixed-bottom text-center">
-            
-        </footer>
+        <button
+            type="button"
+            onclick="returnToTop()"
+            class="btn btn-danger btn-circle btn-circle-l btn-lg"
+            id="return-to-top">
+            <i class="bi bi-arrow-up"></i>
+        </button>
+        <footer class="bg-dark text-bg-dark flex py-auto fixed-bottom text-center"></footer>
     </body>
-</html> 
+</html>
