@@ -4,6 +4,7 @@ import login from "./login.js";
 import mongostore from "connect-mongo";
 import client from "./dbclient.js";
 import path from "path";
+import event from "./event.js";
 
 const app = express();
 
@@ -65,6 +66,8 @@ app.get("/user-registration", (req, res) => {
 });
 
 app.use("/auth", login);
+
+app.use("/event", event);
 
 app.listen(8080, () => {
     console.log("Sever started at http://127.0.0.1:8080");
