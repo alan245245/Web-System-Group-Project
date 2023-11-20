@@ -1,0 +1,32 @@
+[
+    {
+        "eventNumber": 0,
+        "eventDate": "1701748800000",
+        "arriveDate": "1701750000000",
+        "trainNumber": "A001",
+        "title": "Train A001 from Hong Kong to Shenzhen",
+        "origin": "Hong Kong",
+        "destination": "Shenzhen",
+        "occupiedSeats": [],
+        "descrption": "",
+        "priceFirst": 100,
+        "priceEconomic": 50,
+        "row": 5,
+        "column": 2
+    },
+    {
+        "eventNumber": 1,
+        "eventDate": "1701752400000",
+        "arriveDate": "1701756000000",
+        "trainNumber": "A002",
+        "title": "Train A002 from Hong Kong to Guanzhou",
+        "origin": "Hong Kong",
+        "destination": "Guanzhou",
+        "occupiedSeats": [],
+        "descrption": "",
+        "priceFirst": 300,
+        "priceEconomic": 150,
+        "row": 5,
+        "column": 2
+    }
+]
