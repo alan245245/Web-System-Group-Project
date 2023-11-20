@@ -19,7 +19,7 @@ route.post("/login", async (req, res) => {
         req.session.username = user.username;
         req.session.role = user.role;
         req.session.timestamp = new Date();
-        res.json(JSON.stringify({ status: "success", username: user.username }));
+        res.json(JSON.stringify({ status: "success", username: user.username, isAdmin: user.isAdmin }));
     } else {
         req.session.logged = false;
         res.status(401).json(JSON.stringify({ status: `failed`, message: `Incorrect username or password` }));
@@ -29,7 +29,7 @@ route.post("/login", async (req, res) => {
 route.post("/logout", (req, res) => {
     if (req.session.logged) {
         req.session.destroy();
-        res.end();
+        res.json(JSON.stringify({ status: "success", message: "Logout successfully." }));
     } else {
         res.status(401).json(JSON.stringify({ status: "failed", message: "Unauthorized" }));
     }

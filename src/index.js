@@ -15,7 +15,7 @@ app.use(
         secret: "eie4432_groupproject",
         resave: false,
         saveUninitialized: false,
-        cookie: { httpOnly: true },
+        cookie: { httpOnly: true, maxAge: 120000 },
         store: mongostore.create({
             client,
             dbName: "projectdb",
