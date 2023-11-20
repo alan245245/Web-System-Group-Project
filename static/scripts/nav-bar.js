@@ -1,13 +1,20 @@
 $(document).ready(function () {
     if (getCookie("username") == "") {
-        $("#nav-user").append(
-            `<li class="nav-item">
-            <a class="nav-link" href="user-login">Sign in</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="user-registration">Register</a>
-            </li>`
-        );
+        // Highlight sign in if the page is user-login
+        const signInLink = `<li class="nav-item">
+                      <a class="nav-link ${
+                          window.location.pathname == "/user-login.html" ? "active" : ""
+                      }" aria-current="page" href="user-login">Sign in</a>
+                    </li>`;
+
+        // Highlight register if the page is user-regitser
+        const registerLink = `<li class="nav-item">
+                          <a class="nav-link ${
+                              window.location.pathname == "/user-registration.html" ? "active" : ""
+                          }" aria-current="page" href="user-registration">Register</a>
+                        </li>`;
+
+        $("#nav-user").append(`${signInLink}${registerLink}`);
     } else {
         $("#nav-user").append(
             `<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
