@@ -31,6 +31,61 @@ async function getAllEvents() {
     }
 }
 
-async function createEvents(title, origin, destination, priceEconomic, priceFirst, trainNumber, eventTime) {}
+/**
+ * Server-side function to create a new event
+ * @param {string} title
+ * @param {string} origin
+ * @param {string} destination
+ * @param {int} priceEconomic
+ * @param {int} priceFirst
+ * @param {string} trainNumber
+ * @param {int} departureTime Date in miliseconds. Date.getTime()
+ * @param {int} arrivalTime Date in miliseconds. Date.getTime()
+ * @param {string} description
+ * @returns
+ */
+async function createEvents(
+    title,
+    origin,
+    destination,
+    priceEconomic,
+    priceFirst,
+    trainNumber,
+    departureTime,
+    arrivalTime,
+    description
+) {
+    try {
+        const events = client.db("projectdb").collection("event");
 
-export default { getAllEvents };
+        const result = await events.find({ trainNumber: trainNumber });
+
+        if ((await result.toArray()).length != 0) {
+            return { reason: "because train number already exsist" };
+        }
+    } catch (err) {}
+
+    try {
+        const events = client.db("projectdb").collection("event");
+
+        const result = await events.insertOne({
+            title: title,
+            origin: origin,
+            destination: destination,
+            priceEconomic: priceEconomic,
+            priceFirst: priceFirst,
+            trainNumber: trainNumber,
+            departureTime: departureTime,
+            arrivalTime: arrivalTime,
+            description: description,
+            row: 10,
+            column: 4,
+        });
+
+        return result;
+    } catch (err) {
+        console.log(`ERROR: Unable to insert event. ${err}`);
+    }
+}
+
+export default { getAllEvents, createEvents };

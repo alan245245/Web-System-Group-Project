@@ -179,3 +179,70 @@ function validateEvent(event) {
 
     return valid;
 }
+
+/**
+ * Called from a form submit button to process the create event operation
+ * @param {Event} event
+ */
+async function createSingleEvent(event) {
+    event.preventDefault();
+    let title = "";
+    let origin = "";
+    let destination = "";
+    let priceEconomic = "";
+    let priceFirst = "";
+    let trainNumber = "";
+    let departureTime = "";
+    let arrivalTime = "";
+    let description = "";
+
+    if (validateEvent(event)) {
+        try {
+            title = $("#event-title").val().trim();
+            origin = $("#event-origin").val();
+            destination = $("#event-destination").val();
+            priceEconomic = $("#event-econprice").val();
+            priceFirst = $("#event-firstprice").val();
+            trainNumber = $("#event-trainno").val();
+            departureTime = new Date($("#event-departure").val()).getTime();
+            arrivalTime = new Date($("#event-arrival").val()).getTime();
+            description = $("#event-description").val();
+        } catch (err) {
+            console.log(err);
+        }
+        try {
+            $.post(
+                "event/createEvent",
+                {
+                    title: title,
+                    origin: origin,
+                    destination: destination,
+                    priceEconomic: priceEconomic,
+                    priceFirst: priceFirst,
+                    trainNumber: trainNumber,
+                    departureTime: departureTime,
+                    arrivalTime: arrivalTime,
+                    description: description,
+                },
+                function (response) {
+                    const jsonObject = JSON.parse(response);
+                    if (jsonObject.status == "success") {
+                        alert("Event Created");
+                    } else {
+                        alert(`Event cannot be created because ${jsonObject.reason}`);
+                    }
+                },
+                "json"
+            ).fail(function (response) {
+                const jsonObject = JSON.parse(response.responseJSON);
+                if (jsonObject.status == "success") {
+                    alert("Event Created");
+                } else {
+                    alert(`Event cannot be created because ${jsonObject.reason}`);
+                }
+            });
+        } catch (err) {
+            console.log("ERROR: " + err);
+        }
+    }
+}
