@@ -4,7 +4,6 @@ import crypto from "crypto";
 
 async function init_db() {
     try {
-        // TODO
         const events = client.db("projectdb").collection("event");
 
         if ((await events.countDocuments()) == 0) {
@@ -15,7 +14,6 @@ async function init_db() {
             console.log(`Added ${insertCount} events`);
         }
     } catch (err) {
-        // TODO
         console.log(`Unable to intialize the database!` + err);
     }
 }

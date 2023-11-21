@@ -8,10 +8,9 @@ const app = express();
 const route = Router();
 const form = multer();
 
-//let users = new Map();
-
 app.use(form.none());
 
+// Route to get all events
 route.post("/getAllEvents", async (req, res) => {
     console.log(req.body);
     const events = await eventdb.getAllEvents();
@@ -19,7 +18,6 @@ route.post("/getAllEvents", async (req, res) => {
     if (events) {
         res.json(JSON.stringify({ status: "success", events: events }));
     } else {
-        req.session.logged = false;
         res.status(401).json(JSON.stringify({ status: `failed`, message: `Incorrect username or password` }));
     }
 });

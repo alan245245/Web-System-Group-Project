@@ -22,28 +22,10 @@ function validateEvent(event) {
     let priceEconomic;
     let priceFirst;
     let trainNumber;
-    let eventTime;
-    let arriveDate;
+    let departureTime;
+    let arrivalTime;
     let description;
     let valid = true;
-
-    // Try to obtain title
-    try {
-        ele = $("#event-title");
-        title = ele.val();
-        title = title.trim();
-
-        if (!title) {
-            // Invalid: Title is empty
-            ele.removeClass("is-valid").addClass("is-invalid");
-            valid = false;
-        } else {
-            // Valid
-            ele.removeClass("is-invalid").addClass("is-valid");
-        }
-    } catch (err) {
-        console.log(err);
-    }
 
     // Try to obtain origin
     try {
@@ -153,9 +135,9 @@ function validateEvent(event) {
     // Try to obtain date for departure
     try {
         ele = $("#event-departure");
-        eventTime = ele.val();
+        departureTime = ele.val();
 
-        if (!eventTime) {
+        if (!departureTime) {
             // Invalid: Departure is empty
             ele.removeClass("is-valid").addClass("is-invalid");
             valid = false;
@@ -170,9 +152,9 @@ function validateEvent(event) {
     // Try to obtain date for arrive
     try {
         ele = $("#event-arrival");
-        arriveDate = ele.val();
+        arrivalTime = ele.val();
 
-        if (!arriveDate) {
+        if (!arrivalTime) {
             // Invalid: Arrive is empty
             ele.removeClass("is-valid").addClass("is-invalid");
             valid = false;
