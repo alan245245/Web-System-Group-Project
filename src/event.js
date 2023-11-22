@@ -12,13 +12,11 @@ app.use(form.none());
 
 // Route to get all events
 route.post("/getAllEvents", async (req, res) => {
-    console.log(req.body);
     const events = await eventdb.getAllEvents();
-    console.log(events);
     if (events) {
         res.json(JSON.stringify({ status: "success", events: events }));
     } else {
-        res.status(401).json(JSON.stringify({ status: `failed`, message: `Incorrect username or password` }));
+        res.status(401).json(JSON.stringify({ status: `failed` }));
     }
 });
 

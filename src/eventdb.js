@@ -18,6 +18,10 @@ async function init_db() {
     }
 }
 
+/**
+ *
+ * @returns {[Events]}All the event in an array
+ */
 async function getAllEvents() {
     try {
         const events = client.db("projectdb").collection("event");
@@ -27,7 +31,24 @@ async function getAllEvents() {
         let result = await events.find().toArray();
         return result;
     } catch (err) {
-        console.log(`ERROR: Unable to get events.`);
+        console.log(`ERROR: Unable to get all events.`);
+    }
+}
+
+/**
+ *
+ * @param {int} trainNumber
+ * @returns {json} trainEvent
+ */
+
+async function getEventByTrainNumber(trainNumber) {
+    try {
+        const events = client.db("projectdb").collection("event");
+
+        let result = await events.find({ trainNumber: trainNumber }).toArray();
+        return result;
+    } catch (err) {
+        console.log(`ERROR: Unable to get event by train number.`);
     }
 }
 
@@ -88,4 +109,4 @@ async function createEvents(
     }
 }
 
-export default { getAllEvents, createEvents };
+export default { getAllEvents, createEvents, getEventByTrainNumber };
