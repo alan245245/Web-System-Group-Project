@@ -1,4 +1,4 @@
-function drawSeats(row, col) {
+function drawSeats(row, col, occupiedSeats = "", firstClass = "") {
     let seatNumber = 1;
     let heightSVG = 250;
     let widthSVG = 250;
@@ -19,7 +19,11 @@ function drawSeats(row, col) {
             seat.setAttribute("width", 50);
             seat.setAttribute("height", 50);
             seat.setAttribute("id", seatNumber);
-            seat.setAttribute("class", "available-seat");
+            if (occupiedSeats.includes(seatNumber)) {
+                seat.setAttribute("class", "booked-seat");
+            } else {
+                seat.setAttribute("class", "available-seat");
+            }
             svg.appendChild(seat);
 
             let text = document.createElementNS(ns, "text");
