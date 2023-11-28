@@ -78,6 +78,106 @@
             </div>
         </nav>
         <div class="container pb-5">
+            <table class="text-center d-none d-xl-block p-2">
+                <th style="width: 150px">Train No.</th>
+                <th style="width: 200px">Departure Time</th>
+                <th style="width: 130px">Travel Time</th>
+                <th style="width: 220px">Arrival Time</th>
+                <th style="width: 350px">Price</th>
+            </table>
+            <ul class="list-group text-center">
+                <li class="list-group-item">
+                    <ul class="list-group list-group-horizontal-xl">
+                        <li class="list-group-item flex-fill fw-bold">A001</li>
+                        <li class="list-group-item flex-fill">
+                            <div class="text-primary">12:00</div>
+                            Hong Kong
+                        </li>
+                        <li class="list-group-item flex-fill">
+                            20 minutes<br />
+                            <img class="d-none d-xl-inline" src="assets/arrow.png" width="60px" />
+                            <img class="d-inline d-xl-none" src="assets/vertical-arrow.png" width="30px" />
+                        </li>
+                        <li class="list-group-item flex-fill">
+                            <div class="text-primary">12:20</div>
+                            Shenzhen
+                        </li>
+                        <li class="list-group-item flex-fill">
+                            First Class: $100
+                            <span class="badge text-bg-secondary" id="A001-first-available">Available seat: x</span>
+                            <button
+                                class="btn btn-primary"
+                                style="
+                                    --bs-btn-padding-y: 0.05rem;
+                                    --bs-btn-padding-x: 0.5rem;
+                                    --bs-btn-font-size: 0.75rem;
+                                "
+                                id="A001-first-buy">
+                                Buy Ticket
+                            </button>
+                            <br />
+                            Standard Class: $50
+                            <span class="badge text-bg-secondary" id="A001-standard-available">Available seat: x</span>
+                            <button
+                                class="btn btn-primary"
+                                style="
+                                    --bs-btn-padding-y: 0.05rem;
+                                    --bs-btn-padding-x: 0.5rem;
+                                    --bs-btn-font-size: 0.75rem;
+                                "
+                                id="A001-standard-buy">
+                                Buy Ticket
+                            </button>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item list-group-item-secondary">
+                    <ul class="list-group list-group-horizontal-xl">
+                        <li class="list-group-item list-group-item-secondary flex-fill fw-bold">A002</li>
+                        <li class="list-group-item list-group-item-secondary flex-fill">
+                            <div class="text-primary">13:00</div>
+                            Hong Kong
+                        </li>
+                        <li class="list-group-item list-group-item-secondary flex-fill">
+                            60 minutes<br />
+                            <img class="d-none d-xl-inline" src="assets/arrow.png" width="60px" />
+                            <img class="d-inline d-xl-none" src="assets/vertical-arrow.png" width="30px" />
+                        </li>
+                        <li class="list-group-item list-group-item-secondary flex-fill">
+                            <div class="text-primary">14:00</div>
+                            Guangzhou
+                        </li>
+                        <li class="list-group-item list-group-item-secondary flex-fill">
+                            First Class: $300
+                            <span class="badge text-bg-secondary" id="A002-first-available">Available seat: x</span>
+                            <button
+                                class="btn btn-primary"
+                                style="
+                                    --bs-btn-padding-y: 0.05rem;
+                                    --bs-btn-padding-x: 0.5rem;
+                                    --bs-btn-font-size: 0.75rem;
+                                "
+                                id="A002-first-buy">
+                                Buy Ticket
+                            </button>
+                            <br />
+                            Standard Class: $150
+                            <span class="badge text-bg-secondary" id="A002-standard-available">Available seat: x</span>
+                            <button
+                                class="btn btn-primary"
+                                style="
+                                    --bs-btn-padding-y: 0.05rem;
+                                    --bs-btn-padding-x: 0.5rem;
+                                    --bs-btn-font-size: 0.75rem;
+                                "
+                                id="A002-standard-buy">
+                                Buy Ticket
+                            </button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!--
             <div class="d-none d-lg-block">
                 <table class="table text-center table-striped" id="large-table">
                     <thead>
@@ -298,6 +398,7 @@
                     </tbody>
                 </table>
             </div>
+            -->
         </div>
         <button
             type="button"
