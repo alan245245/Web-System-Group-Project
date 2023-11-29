@@ -1,4 +1,11 @@
 $(document).ready(() => {
+    if (localStorage.getItem("username") && localStorage.getItem("password")) {
+        // If password is saved, load it
+        $("#user-name").val(localStorage.getItem("username"));
+        $("#user-password").val(localStorage.getItem("password"));
+        document.getElementById("user-rememberme").checked = true;
+    }
+
     $("#login").on("click", (event) => {
         event.preventDefault();
         const username = $("#user-name").val();
@@ -14,6 +21,14 @@ $(document).ready(() => {
                     if (jsonObject.status == "success") {
                         setCookie("username", jsonObject.username, 60);
                         setCookie("isAdmin", jsonObject.isAdmin, 60);
+                        // Implement remember password function
+                        if (document.querySelector("#user-rememberme").checked) {
+                            localStorage.setItem("username", username);
+                            localStorage.setItem("password", password);
+                        } else {
+                            localStorage.setItem("username", "");
+                            localStorage.setItem("password", "");
+                        }
                         alert(`Logged as \`${jsonObject.username}\``);
                         window.location.replace("event-dashboard");
                     }

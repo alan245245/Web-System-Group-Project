@@ -65,6 +65,10 @@ app.get("/user-registration", (req, res) => {
     res.redirect("user-registration.html");
 });
 
+app.get("/user-forgot-password", (req, res) => {
+    res.redirect("user-forgot-password.html");
+});
+
 app.use("/auth", login);
 
 app.use("/event", event);
