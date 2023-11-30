@@ -12,7 +12,8 @@
         "priceFirst": 100,
         "priceEconomic": 50,
         "row": 10,
-        "column": 4
+        "column": 4,
+        "firstClass": [1, 2, 3, 4]
     },
     {
         "eventNumber": 1,
@@ -27,6 +28,7 @@
         "priceFirst": 300,
         "priceEconomic": 150,
         "row": 10,
-        "column": 4
+        "column": 4,
+        "firstClass": [1, 2, 3, 4, 5, 6, 7, 8]
     }
 ]

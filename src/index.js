@@ -53,10 +53,6 @@ app.get("/seat-management", (req, res) => {
     res.redirect("seat-management.html");
 });
 
-app.get("/ticket-booking", (req, res) => {
-    res.redirect("ticket-booking.html");
-});
-
 app.get("/user-login", (req, res) => {
     res.redirect("user-login.html");
 });

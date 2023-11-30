@@ -45,10 +45,10 @@ async function getEventByTrainNumber(trainNumber) {
     try {
         const events = client.db("projectdb").collection("event");
 
-        let result = await events.findOne({ trainNumber: trainNumber }).toArray();
+        let result = await events.findOne({ trainNumber: trainNumber });
         return result;
     } catch (err) {
-        console.log(`ERROR: Unable to get event by train number.`);
+        console.log(`ERROR: Unable to get event by train number - ${err}`);
     }
 }
 

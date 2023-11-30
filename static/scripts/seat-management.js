@@ -1,6 +1,6 @@
 function drawSeats(row, col, occupiedSeats = "", firstClass = "") {
     let seatNumber = 1;
-    let heightSVG = 250;
+    let heightSVG = 500;
     let widthSVG = 250;
     let startX = 0,
         startY = 0;
@@ -21,6 +21,8 @@ function drawSeats(row, col, occupiedSeats = "", firstClass = "") {
             seat.setAttribute("id", seatNumber);
             if (occupiedSeats.includes(seatNumber)) {
                 seat.setAttribute("class", "booked-seat");
+            } else if (firstClass.includes(seatNumber)) {
+                seat.setAttribute("class", "first-available");
             } else {
                 seat.setAttribute("class", "available-seat");
             }
@@ -30,7 +32,7 @@ function drawSeats(row, col, occupiedSeats = "", firstClass = "") {
             text.setAttribute("style", "fill: white;display:block");
             text.setAttribute("x", startX + gapX / 2);
             text.setAttribute("y", startY + gapY / 2);
-            text.setAttribute("fill", "white");
+            text.setAttribute("fill", "black");
             text.setAttribute("text-anchor", "middle");
             text.setAttribute("alignment-baseline", "central");
             text.setAttribute("class", "seat-number");

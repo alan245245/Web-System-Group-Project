@@ -53,4 +53,21 @@ route.post("/createEvent", async (req, res) => {
     }
 });
 
+route.post("/getEventByTrainNumber", async (req, res) => {
+    const event = await eventdb.getEventByTrainNumber(req.body.trainNumber);
+    if (event) {
+        res.json(JSON.stringify({ status: "success", event: event }));
+    } else {
+        res.status(401).json(JSON.stringify({ status: `failed` }));
+    }
+});
+
+route.post("/ticket-booking", (req, res) => {
+    if (req.body.trainNumber) {
+        res.json(JSON.stringify({ status: "success" }));
+    } else {
+        res.status(401).json(JSON.stringify({ status: `failed` }));
+    }
+});
+
 export default route;

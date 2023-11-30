@@ -12,7 +12,8 @@
         <!--
             Page specific script
         -->
-        <script src=""></script>
+        <script src="scripts/ticket-booking.js"></script>
+        <script src="scripts/seat-management.js"></script>
         <!--
         The line below is used to enable proper scaling on mobile device
         -->
@@ -28,7 +29,7 @@
         -->
         <style>
             .available-seat {
-                fill: green;
+                fill: rgb(0, 186, 0);
                 stroke-width: 1;
                 stroke: black;
                 cursor: pointer;
@@ -38,6 +39,18 @@
                 stroke-width: 1;
                 stroke: black;
                 cursor: not-allowed;
+            }
+            .first-available{
+                fill: yellow;
+                stroke-width: 1;
+                stroke: black;
+                cursor: pointer;
+            }
+            .selecting-seat{
+                fill: rgb(77, 77, 255);
+                stroke-width: 1;
+                stroke: black;
+                cursor: pointer;
             }
             .seat-number {
                 pointer-events: none;
@@ -93,231 +106,25 @@
             </div>
         </nav>
         <div class="container pb-5">
-            <h1 class="text-center">
-                Currently booking:<br /><span id="train-id" class="badge text-bg-primary">A001</span>
-                <span id="train-info" class="badge text-bg-secondary">Hong Kong to Shenzhen</span>
-            </h1>
-            <h2 class="text-center">
-                Departure Time: <span class="badge text-bg-primary">12:00</span>
-                <div class="d-inline">
-                    <label for="seat-type">Seat Class:</label>
-                    <select class="form-select" aria-label="Standard Seat" id="seat-type" name="seat-type">
-                        <option selected value="standard">Standard Seat</option>
-                        <option value="first-class">First Class Seat</option>
-                    </select>
-                </div>
-            </h2>
+            <h2 class="text-center">Currently booking:<br /><span class="badge text-bg-primary" id="trainInfo"></span></h1>
+            <h2 class="text-center">Departure Time: <span class="badge text-bg-secondary" id="trainDT"></span></h2>
+            <h5 class="text-center fw-light">
+                First class seat are highlighted in yellow. Standard seat are highlighted in green. Booked seat are highlighted in red.
+            </h5>
             <div class="text-center">
-                <svg width="250" height="250">
-                    <rect x="0" y="0" width="50" height="50" id="1" class="available-seat" />
-                    <text
-                        x="25"
-                        y="25"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        1
-                    </text>
-                    <rect x="50" y="0" width="50" height="50" id="2" class="available-seat" />
-                    <text
-                        x="75"
-                        y="25"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        2
-                    </text>
-                    <rect x="150" y="0" width="50" height="50" id="3" class="available-seat" />
-                    <text
-                        x="175"
-                        y="25"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        3
-                    </text>
-                    <rect x="200" y="0" width="50" height="50" id="4" class="booked-seat" />
-                    <text
-                        x="225"
-                        y="25"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        4
-                    </text>
-                    <rect x="0" y="50" width="50" height="50" id="5" class="available-seat" />
-                    <text
-                        x="25"
-                        y="75"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        5
-                    </text>
-                    <rect x="50" y="50" width="50" height="50" id="6" class="available-seat" />
-                    <text
-                        x="75"
-                        y="75"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        6
-                    </text>
-                    <rect x="150" y="50" width="50" height="50" id="7" class="available-seat" />
-                    <text
-                        x="175"
-                        y="75"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        7
-                    </text>
-                    <rect x="200" y="50" width="50" height="50" id="8" class="available-seat" />
-                    <text
-                        x="225"
-                        y="75"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        8
-                    </text>
-                    <rect x="0" y="100" width="50" height="50" id="9" class="available-seat" />
-                    <text
-                        x="25"
-                        y="125"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        9
-                    </text>
-                    <rect x="50" y="100" width="50" height="50" id="10" class="available-seat" />
-                    <text
-                        x="75"
-                        y="125"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        10
-                    </text>
-                    <rect x="150" y="100" width="50" height="50" id="11" class="available-seat" />
-                    <text
-                        x="175"
-                        y="125"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        11
-                    </text>
-                    <rect x="200" y="100" width="50" height="50" id="12" class="available-seat" />
-                    <text
-                        x="225"
-                        y="125"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        12
-                    </text>
-                    <rect x="0" y="150" width="50" height="50" id="13" class="available-seat" />
-                    <text
-                        x="25"
-                        y="175"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        13
-                    </text>
-                    <rect x="50" y="150" width="50" height="50" id="14" class="available-seat" />
-                    <text
-                        x="75"
-                        y="175"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        14
-                    </text>
-                    <rect x="150" y="150" width="50" height="50" id="15" class="available-seat" />
-                    <text
-                        x="175"
-                        y="175"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        15
-                    </text>
-                    <rect x="200" y="150" width="50" height="50" id="16" class="available-seat" />
-                    <text
-                        x="225"
-                        y="175"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        16
-                    </text>
-                    <rect x="0" y="200" width="50" height="50" id="17" class="available-seat" />
-                    <text
-                        x="25"
-                        y="225"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        17
-                    </text>
-                    <rect x="50" y="200" width="50" height="50" id="18" class="available-seat" />
-                    <text
-                        x="75"
-                        y="225"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        18
-                    </text>
-                    <rect x="150" y="200" width="50" height="50" id="19" class="available-seat" />
-                    <text
-                        x="175"
-                        y="225"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        19
-                    </text>
-                    <rect x="200" y="200" width="50" height="50" id="20" class="available-seat" />
-                    <text
-                        x="225"
-                        y="225"
-                        fill="white"
-                        text-anchor="middle"
-                        alignment-baseline="central"
-                        class="seat-number">
-                        20
-                    </text>
+                <svg width="250" height="500" id="seat-map">
+                    <!--
+                        svg will be drawn here using javascript
+                    -->
                 </svg>
             </div>
             <div id="selected-seat" class="text-center fs-2 fw-bold">Click a seat to book.</div>
-            <div class="d-none text-center" id="confirm-buttons">
-                <button class="btn btn-primary" id="confirm">Confirm</button>
-                <button class="btn btn-secondary" id="cancel">Cancel</button>
-            </div>
             <hr />
             <div class="fs-2 fw-bold">Price: $<span id="price">0</span></div>
+            <div class="d-none text-center" id="confirm-buttons">
+                <button class="btn btn-primary" id="confirm">Confirm</button>
+                <button class="btn btn-secondary" id="reset">Reset</button>
+            </div>
         </div>
         <button
             type="button"

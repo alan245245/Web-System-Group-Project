@@ -35,30 +35,31 @@ $().ready(() => {
                         </li>
                         <li class="list-group-item ${i % 2 == 1 ? "list-group-item-secondary" : ""} flex-fill">
                             First Class: $${jsonObject.events[i].priceFirst}<br class="d-inline d-xl-none" />
-                            <span class="badge text-bg-secondary">Available seat: ${
-                                jsonObject.events[i].occupiedSeats
-                            }</span>
-                            <button
-                                class="btn btn-primary"
-                                style="--bs-btn-padding-y: 0.05rem; --bs-btn-padding-x: 0.5rem; --bs-btn-font-size: 0.75rem"
-                                id="${jsonObject.events[i].trainNumber}-first-buy">
-                                Buy Ticket
-                            </button>
                             <br />
                             Standard Class: $${jsonObject.events[i].priceEconomic}<br class="d-inline d-xl-none" />
+                        </li>
+                        <li class="list-group-item ${i % 2 == 1 ? "list-group-item-secondary" : ""} flex-fill">
                             <span class="badge text-bg-secondary">Available seat: ${
-                                jsonObject.events[i].occupiedSeats
+                                jsonObject.events[i].row * jsonObject.events[i].column -
+                                jsonObject.events[i].occupiedSeats.length
                             }</span>
                             <button
+                                id = "${jsonObject.events[i].trainNumber}-buy"
                                 class="btn btn-primary"
-                                style="--bs-btn-padding-y: 0.05rem; --bs-btn-padding-x: 0.5rem; --bs-btn-font-size: 0.75rem"
-                                id="${jsonObject.events[i].trainNumber}-standard-buy">
+                                style="--bs-btn-padding-y: 0.05rem; --bs-btn-padding-x: 0.5rem; --bs-btn-font-size: 0.75rem">
                                 Buy Ticket
                             </button>
                         </li>
+                        
                     </ul>
                 `);
             }
+            $("#A001-buy").on("click", function () {
+                window.open("ticket-booking.html?trainNumber=A001", "_self");
+            });
+            $("#A002-buy").on("click", function () {
+                window.open("ticket-booking.html?trainNumber=A002", "_self");
+            });
         },
         "json"
     ).fail(function (response) {
