@@ -92,6 +92,36 @@ async function update_user(firstName, lastName, gender, birthday, username, pass
     }
 }
 
+async function update_password(email, username, password) {
+    try {
+        const users = client.db("projectdb").collection("user");
+        let hash;
+        await sha256(password)
+            .then((result) => (hash = result))
+            .catch((error) => console.log("Error", error));
+
+        const updateReturn = await users.updateOne(
+            { username: username, email: email },
+            {
+                $set: {
+                    username: username,
+                    password: hash,
+                    email: email,
+                },
+            }
+        );
+
+        if (updateReturn.modifiedCount != 0) {
+            console.log(`modified ${updateReturn.modifiedCount} user`);
+            return true;
+        } else {
+            return false;
+        }
+    } catch (err) {
+        console.log(`Unable to update the database!` + err);
+    }
+}
+
 async function fetch_user(username) {
     try {
         const users = client.db("projectdb").collection("user");
@@ -140,4 +170,4 @@ async function username_exist(username) {
 //Lab #5.8.2
 //username_exist('new_user').then((res) => console.log(res));
 
-export default { validate_user, update_user, fetch_user, username_exist };
+export default { validate_user, update_user, fetch_user, username_exist, update_password };

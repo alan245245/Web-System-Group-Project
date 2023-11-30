@@ -1,16 +1,16 @@
 $.when($(document).ready).then(function () {
     // When the user input the password, update the strength meter
-    $("#user-password").on("input", function () {
+    $("#forgot-password").on("input", function () {
         updateMeter();
     });
 
     // Show the password suggestions when focused
-    $("#user-password").on("focus", function () {
+    $("#forgot-password").on("focus", function () {
         $("#password-suggestion").addClass("d-flex").removeClass("d-none");
     });
 
     // Hide the password suggestions when not focused
-    $("#user-password").on("blur", function () {
+    $("#forgot-password").on("blur", function () {
         $("#password-suggestion").addClass("d-none").removeClass("d-flex");
     });
 });
@@ -22,7 +22,7 @@ $.when($(document).ready).then(function () {
  *
  */
 function updateMeter() {
-    const ele = $("#user-password");
+    const ele = $("#forgot-password");
     const meterSections = document.querySelectorAll(".meter-section");
     password = ele.val().trim();
 
@@ -90,41 +90,137 @@ function calculatePasswordStrength(pw) {
     return strength;
 }
 
+async function validateForm() {
+    let email;
+    let username;
+    let password;
+    let valid = true;
+
+    /* 
+    Input checking username 
+    - Check for no input
+    - Check for duplicates
+    */
+    try {
+        const ele = $("#user-name");
+        username = ele.val();
+        username = username;
+        if (username == "") {
+            // Invalid: Missing input
+            ele.removeClass("is-valid").addClass("is-invalid");
+            valid = false;
+        } else {
+            ele.removeClass("is-invalid").addClass("is-valid");
+        }
+    } catch (error) {
+        // Invalid: Fetch error
+        const ele = $("#user-name");
+        ele.removeClass("is-valid").addClass("is-invalid");
+        valid = false;
+    }
+
+    /* 
+    Input checking for password 
+    - Check for no input
+    - Check for password strength
+    - Check for not match password
+    */
+    try {
+        const ele = $("#forgot-password");
+        password = ele.val();
+        passwordrp = $("#forgot-passwordrp").val();
+        const strength = calculatePasswordStrength(password);
+        if (password == "") {
+            // Invalid: Missing input
+            ele.removeClass("is-valid").addClass("is-invalid");
+            valid = false;
+        } else if (strength < 2) {
+            // Invalid: Password not strong enough
+            console.log(strength);
+            ele.removeClass("is-valid").addClass("is-invalid");
+            valid = false;
+        } else if (password != passwordrp) {
+            // Invalid: Password does not match
+            ele.removeClass("is-invalid").addClass("is-valid");
+            $("#forgot-passwordrp").removeClass("is-valid").addClass("is-invalid");
+            valid = false;
+        } else {
+            // Valid
+            ele.removeClass("is-invalid").addClass("is-valid");
+            $("#forgot-passwordrp").removeClass("is-invalid").addClass("is-valid");
+        }
+    } catch (error) {
+        // Invalid: Fetch error
+        const ele = $("#forgot-password");
+        ele.removeClass("is-valid").addClass("is-invalid");
+        valid = false;
+    }
+
+    /* 
+    Input checking for email 
+    - Check for no input
+    - Check for email patterns
+    */
+    try {
+        const ele = $("#user-email");
+        email = ele.val();
+        email = email.toLowerCase().trim();
+        if (email == "") {
+            // Invalid: Missing input
+            ele.removeClass("is-valid").addClass("is-invalid");
+            valid = false;
+        } else if (
+            !email.match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            )
+        ) {
+            // Invalid: Invalid email pattern
+            ele.removeClass("is-valid").addClass("is-invalid");
+            valid = false;
+        } else {
+            // Valid
+            ele.removeClass("is-invalid").addClass("is-valid");
+        }
+    } catch (error) {
+        // Invalid: Fetch error
+        const ele = $("#user-email");
+        ele.removeClass("is-valid").addClass("is-invalid");
+        valid = false;
+    }
+
+    // Function return true if no error is detected
+    return valid;
+}
+
 /**
  * Trigger by register button to validate and send request to server
  * @param {*} event
  * @returns
  */
-async function register(event) {
+async function forgot_password(event) {
     event.preventDefault();
     // Validate registration form, return if the form is invalid
     if (!validateForm()) return;
 
-    const firstName = $("#user-firstname").val();
-    const lastName = $("#user-lastname").val();
-    const gender = document.querySelector('input[name="gender"]:checked').value;
-    const birthday = $("#user-birthday").val();
-    const username = $("#user-name").val();
-    let password = $("#user-password").val();
     const email = $("#user-email").val();
+    const username = $("#user-username").val();
+    let password = $("#forgot-password").val();
 
     const user = {
-        firstName: firstName,
-        lastName: lastName,
-        gender: gender,
-        birthday: birthday,
         username: username,
         password: password,
         email: email,
     };
 
     $.post(
-        "auth/register",
+        "auth/forgot-password",
         user,
         function (response) {
             const jsonObject = JSON.parse(response);
             if (jsonObject.status == "success") {
-                alert(`Welcome, ${jsonObject.username}!\nYou can login with your account now!`);
+                alert(`Welcome, ${jsonObject.username}!\nYou can login with your new password now!`);
+            } else {
+                alert(`${jsonObject.message}`);
             }
         },
         "json"

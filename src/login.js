@@ -64,6 +64,34 @@ route.post("/register", async (req, res) => {
     }
 });
 
+route.post("/forgot-password", async (req, res) => {
+    console.log(req.body);
+
+    const username = req.body.username;
+    const password = req.body.password;
+    const email = req.body.email;
+
+    if (!username || !password) {
+        res.status(400).json(JSON.stringify({ status: "failed", message: "Missing fields" }));
+    } else if (username.length < 3) {
+        res.status(400).json(JSON.stringify({ status: "failed", message: "Username must be at least 3 chacaters" }));
+    } else {
+        try {
+            const response = await users.update_password(email, username, password);
+            console.log(response);
+            if (!response) {
+                res.json(JSON.stringify({ status: "failed", message: "Data doesn't match in database" }));
+            } else {
+                res.json(JSON.stringify({ status: "success", username: username }));
+            }
+        } catch (err) {
+            res.status(400).json(
+                JSON.stringify({ status: "failed", message: "Failed to communicate with database: " + err })
+            );
+        }
+    }
+});
+
 route.get("/me", async (req, res) => {
     if (req.session.logged) {
         const curuser = await users.fetch_user(req.session.username);
