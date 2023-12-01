@@ -126,13 +126,14 @@
         -->
         <div class="container text-left pb-5">
             <section class="w-100 d-flex p-3 justify-content-center">
-                <form class="py-3">
+                <form class="py-3" id="registration-form" enctype="multipart/form-data">
                     <div class="form-group py-1 row justify-content-center">
                         <label for="user-firstname" class="col-lg-2 col-md-2 col-form-label">First name</label>
                         <div class="col-lg-4 col-md-4">
                             <input
                                 type="text"
                                 class="form-control"
+                                name="firstname"
                                 id="user-firstname"
                                 placeholder="Enter your first name" />
                             <div class="valid-feedback">Looks good!</div>
@@ -142,6 +143,7 @@
                             <input
                                 type="text"
                                 class="form-control"
+                                name="lastname"
                                 id="user-lastname"
                                 placeholder="Enter your last name" />
                             <div class="valid-feedback">Looks good!</div>
@@ -170,7 +172,7 @@
                         </div>
                         <label for="user-birthday" class="col-lg-2 col-md-2 col-form-label">Birthday</label>
                         <div class="col-lg-4 col-md-4">
-                            <input type="date" class="form-control" id="user-birthday" />
+                            <input type="date" class="form-control" name="birthday" id="user-birthday" />
                             <div class="invalid-feedback">Please select your birthday</div>
                         </div>
                     </div>
@@ -181,6 +183,7 @@
                                 type="text"
                                 class="form-control"
                                 id="user-name"
+                                name="username"
                                 placeholder="Used to login to your account" />
                             <div class="invalid-feedback" id="invalid-feedback-username"></div>
                         </div>
@@ -192,6 +195,7 @@
                                 type="password"
                                 class="form-control"
                                 id="user-password"
+                                name="password"
                                 placeholder="Enter your password" />
                             <div class="password-meter">
                                 <div class="meter-section rounded me-2"></div>
@@ -228,6 +232,7 @@
                                 type="password"
                                 class="form-control"
                                 id="user-passwordrp"
+                                name="passwordrp"
                                 placeholder="Repeat your password" />
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback" id="invalid-feedback-password">
@@ -238,14 +243,24 @@
                     <div class="form-group py-1 row">
                         <label for="user-email" class="col-lg-2 col-form-label">Email</label>
                         <div class="col-lg-10">
-                            <input type="email" class="form-control" id="user-email" placeholder="name@example.com" />
+                            <input
+                                type="email"
+                                class="form-control"
+                                name="email"
+                                id="user-email"
+                                placeholder="name@example.com" />
                             <div class="invalid-feedback" id="invalid-feedback-email">
                                 Invalid Email. Please enter a valid email.
                             </div>
                         </div>
                     </div>
+                    <div class="form-group py-1 row">
+                        <input id="profileImage" type="file" name="upload" accept=".jpg .png" />
+                    </div>
                     <div class="form-group py-1 ms-auto">
-                        <button type="submit" onclick="register(event)" class="btn btn-success my-3">Register</button>
+                        <button type="submit" id="submitBtn" onclick="register(event)" class="btn btn-success my-3">
+                            Register
+                        </button>
                         <button type="reset" class="btn btn-danger my-3 mx-3">Reset</button>
                     </div>
                 </form>

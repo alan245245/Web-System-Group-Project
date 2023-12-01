@@ -5,7 +5,13 @@ import users from "./userdb.js";
 
 const app = express();
 const route = Router();
-const form = multer();
+var storage = multer.diskStorage({
+    destination: "./upload/user/path",
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "-" + file.originalname);
+    },
+});
+const form = multer({ storage: storage });
 
 //let users = new Map();
 
@@ -35,31 +41,40 @@ route.post("/logout", (req, res) => {
     }
 });
 
-route.post("/register", async (req, res) => {
+route.post("/register", form.any(), async (req, res) => {
     console.log(req.body);
 
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
+    const firstName = req.body.firstname;
+    const lastName = req.body.lastname;
     const gender = req.body.gender;
     const birthday = req.body.birthday;
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
+    const file = req.files;
+    let filePath;
+
+    if (file.length != 0) filePath = file[0].path;
+    else filePath = "";
 
     if (!username || !password) {
         res.status(400).json(JSON.stringify({ status: "failed", message: "Missing fields" }));
+        if (file.length != 0) fs.unlink(file[0].path);
     } else if (username.length < 3) {
         res.status(400).json(JSON.stringify({ status: "failed", message: "Username must be at least 3 chacaters" }));
+        if (file.length != 0) fs.unlink(file[0].path);
     } else if (await users.username_exist(username)) {
         res.status(400).json(JSON.stringify({ status: "failed", message: `Username ${username} already exists` }));
+        if (file.length != 0) fs.unlink(file[0].path);
     } else {
         try {
-            users.update_user(firstName, lastName, gender, birthday, username, password, email, false);
+            users.update_user(firstName, lastName, gender, birthday, username, password, email, filePath, false);
             res.json(JSON.stringify({ status: "success", username: username }));
         } catch (err) {
             res.status(400).json(
                 JSON.stringify({ status: "failed", message: "Account created but unable to save into database" + err })
             );
+            if (file.length != 0) fs.unlink(file[0].path);
         }
     }
 });

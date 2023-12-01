@@ -53,7 +53,7 @@ async function validate_user(username, password) {
     }
 }
 
-async function update_user(firstName, lastName, gender, birthday, username, password, email, isAdmin) {
+async function update_user(firstName, lastName, gender, birthday, username, password, email, isAdmin, path = "") {
     try {
         const users = client.db("projectdb").collection("user");
         let hash;
@@ -72,6 +72,7 @@ async function update_user(firstName, lastName, gender, birthday, username, pass
                     username: username,
                     password: hash,
                     email: email,
+                    path: path,
                     isAdmin: isAdmin,
                 },
             },

@@ -311,6 +311,8 @@ async function register(event) {
     const username = $("#user-name").val();
     let password = $("#user-password").val();
     const email = $("#user-email").val();
+    const file = document.getElementById("profileImage").files[0];
+    console.log(file);
 
     const user = {
         firstName: firstName,
@@ -320,8 +322,37 @@ async function register(event) {
         username: username,
         password: password,
         email: email,
+        file: file,
     };
 
+    let data = new FormData(document.getElementById("registration-form"));
+    for (const pair of data.entries()) {
+        console.log(`${pair[0]}, ${pair[1]}`);
+    }
+
+    let result = await (
+        await fetch("auth/register", {
+            method: "POST",
+            withCredentials: true,
+            credentials: "include",
+            headers: {
+                Accept: "application/json",
+            },
+            body: data,
+        })
+    ).json();
+
+    const jsonObject = JSON.parse(result);
+
+    if (jsonObject.status == "success") {
+        alert(`Welcome, ${jsonObject.username}!\nYou can login with your account now!`);
+    } else if (jsonObject.status == "failed" && jsonObject.message != "") {
+        alert(`${jsonObject.message}`);
+    } else {
+        alert(`An unknown error has occured`);
+    }
+
+    /*
     $.post(
         "auth/register",
         user,
@@ -340,4 +371,5 @@ async function register(event) {
             alert(`An unknown error has occured`);
         }
     });
+    */
 }
