@@ -12,7 +12,7 @@
         <!--
             Page specific script
         -->
-        <script src=""></script>
+        <script src="scripts/payment.js"></script>
         <!--
         The line below is used to enable proper scaling on mobile device
         -->
@@ -47,7 +47,7 @@
                             <a class="nav-link" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Event Dashboard</a>
+                            <a class="nav-link" href="event-dashboard.html">Event Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a
@@ -81,25 +81,14 @@
                 <div class="card" style="width: 24rem">
                     <div class="card-header">Selected Seat</div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-auto d-block d-md-flex py-2">Train id: A001</div>
-                        </div>
-                        <div class="col d-block d-md-flex py-2">Location: Hong Kong to Shenzhen</div>
-                        <div class="col d-block d-md-flex py-2">Departure Time: 12:00</div>
-                        <div class="col d-block d-md-flex py-2">Seat Type: Standard Seat</div>
-                        <div class="col d-block d-md-flex py-2">Seat Number: 7, 8</div>
+                        <div id="title" class="col d-block d-md-flex py-2">title</div>
+                        <div class="col d-block d-md-flex py-2">Departure Time: <span id="departureTime"></span></div>
+                        <div class="col d-block d-md-flex py-2">Selected Seat: <span id="selectedSeat"></span></div>
                     </div>
                 </div>
             </section>
-            <!--
-            <div class="fs-4 fw-bold">
-                Train id: <span class="badge text-bg-primary">A001</span> Location: <span class="badge text-bg-primary">Hong Kong to Shenzhen</span><br>
-                Departure Time: <span class="badge text-bg-primary">12:00</span><br>
-                Selected Seat: <span class="badge text-bg-secondary">Standard Seat</span> <span class="badge text-bg-primary">7, 8</span>
-            </div>
-            -->
             <hr />
-            <div class="fs-2 fw-bold">Price: $<span id="price">100</span></div>
+            <div class="fs-2 fw-bold">Price: $<span id="price">price</span></div>
             <div>
                 <label for="payment-method">Payment Method: </label>
                 <select id="payment-method">
@@ -110,21 +99,21 @@
             <form id="payment-info">
                 <div class="mb-3">
                     <label for="card-id" class="form-label">Card ID:</label>
-                    <input type="text" class="form-control" id="card-id" />
+                    <input type="text" class="form-control" id="card-id" name="card-id" />
                 </div>
                 <div class="mb-3">
                     <label for="card-holder-name" class="form-label">Card Holder Name:</label>
-                    <input type="text" class="form-control" id="card-holder-name" />
+                    <input type="text" class="form-control" id="card-holder-name" name="card-holder-name" />
                 </div>
                 <div class="mb-3">
                     <label for="security-code" class="form-label">Security Code:</label>
-                    <input type="text" class="form-control" id="security-code" />
+                    <input type="text" class="form-control" id="security-code" name="security-code" />
                 </div>
                 <div class="mb-3">
                     <label for="expire-date" class="form-label">Card Expire Date:</label>
-                    <input type="date" class="form-control" id="expire-date" />
+                    <input type="month" class="form-control" id="expire-date" name="expire-date" />
                 </div>
-                <button type="submit" class="btn btn-primary">Confirm</button>
+                <button type="button" class="btn btn-primary" id="submit">Confirm</button>
                 <button type="reset" class="btn btn-secondary">reset</button>
             </form>
         </div>

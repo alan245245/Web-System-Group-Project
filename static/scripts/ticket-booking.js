@@ -2,8 +2,8 @@ $().ready(() => {
     console.log("ready");
     const urlParams = new URLSearchParams(window.location.search);
     const trainNumber = urlParams.get("trainNumber");
-    if (trainNumber == null) {
-        alert("Please go to Event Dashboard choose a train shift first.");
+    if (trainNumber == null || trainNumber == "") {
+        alert("Please go to Event Dashboard to choose a train shift first.");
         window.open("event-dashboard.html", "_self");
     }
     var selectedSeat = [];
@@ -17,7 +17,12 @@ $().ready(() => {
             `${dt.getHours() < 10 ? "0" : ""}${dt.getHours()}:${dt.getMinutes() < 10 ? "0" : ""}${dt.getMinutes()}`
         );
         drawSeats(res.event.row, res.event.column, res.event.occupiedSeats, res.event.firstClass);
-        $("#confirm").on("click", function () {});
+        $("#confirm").on("click", function () {
+            window.open(
+                `payment.html?trainNumber=${res.event.trainNumber}&selectedSeat=${selectedSeat}&price=${price}`,
+                "_self"
+            );
+        });
         $("#reset").on("click", function () {
             selectedSeat = [];
             price = 0;

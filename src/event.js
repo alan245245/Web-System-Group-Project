@@ -3,6 +3,7 @@ import multer from "multer";
 import fs from "fs/promises";
 import users from "./userdb.js";
 import eventdb from "./eventdb.js";
+import session from "express-session";
 
 const app = express();
 const route = Router();
@@ -57,14 +58,6 @@ route.post("/getEventByTrainNumber", async (req, res) => {
     const event = await eventdb.getEventByTrainNumber(req.body.trainNumber);
     if (event) {
         res.json(JSON.stringify({ status: "success", event: event }));
-    } else {
-        res.status(401).json(JSON.stringify({ status: `failed` }));
-    }
-});
-
-route.post("/ticket-booking", (req, res) => {
-    if (req.body.trainNumber) {
-        res.json(JSON.stringify({ status: "success" }));
     } else {
         res.status(401).json(JSON.stringify({ status: `failed` }));
     }
