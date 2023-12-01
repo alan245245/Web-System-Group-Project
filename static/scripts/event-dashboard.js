@@ -53,10 +53,29 @@ $().ready(() => {
                 `);
             }
             $("#A001-buy").on("click", function () {
-                window.open("ticket-booking.html?trainNumber=A001", "_self");
+                //check logged
+                $.get("event/checkLogin", function (response) {
+                    const res = JSON.parse(response);
+                    if (res.status == "success") {
+                        window.open("ticket-booking.html?trainNumber=A001", "_self");
+                    } else {
+                        alert("Please login or register before buying ticket.");
+                    }
+                }).fail(function (response) {
+                    alert("Please login or register before buying ticket.");
+                });
             });
             $("#A002-buy").on("click", function () {
-                window.open("ticket-booking.html?trainNumber=A002", "_self");
+                $.get("event/checkLogin", function (response) {
+                    const res = JSON.parse(response);
+                    if (res.status == "success") {
+                        window.open("ticket-booking.html?trainNumber=A002", "_self");
+                    } else {
+                        alert("Please login or register before buying ticket.");
+                    }
+                }).fail(function (response) {
+                    alert("Please login or register before buying ticket.");
+                });
             });
         },
         "json"

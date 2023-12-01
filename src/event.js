@@ -63,4 +63,12 @@ route.post("/getEventByTrainNumber", async (req, res) => {
     }
 });
 
+route.get("/checkLogin", (req, res) => {
+    if (req.session.logged) {
+        res.json(JSON.stringify({ status: "success" }));
+    } else {
+        res.status(401).json(JSON.stringify({ status: `failed` }));
+    }
+});
+
 export default route;

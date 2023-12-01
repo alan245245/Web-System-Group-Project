@@ -81,12 +81,14 @@ async function processPayment(
         if (!securityNumber) return { status: "failed", reason: "the security number is missing" };
 
         // Verify if card is expired
-        if (cardExpireDate <= new Date()) return { status: "failed", reason: "the provided credit card is expired" };
+        if (new Date(cardExpireDate).getTime() <= new Date().getTime())
+            return { status: "failed", reason: "the provided credit card is expired" };
 
         const response = await transactions.insertOne({
             username: username,
             eventNumber: eventNumber,
             selectedSeats: selectedSeats,
+            time: new Date().getTime(),
         });
         let finalSeats = selectedSeats.concat(result.occupiedSeats);
         await events.updateOne({ eventNumber: eventNumber }, { $set: { occupiedSeats: finalSeats } });

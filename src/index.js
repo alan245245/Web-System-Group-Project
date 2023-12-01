@@ -5,6 +5,7 @@ import mongostore from "connect-mongo";
 import client from "./dbclient.js";
 import path from "path";
 import event from "./event.js";
+import payment from "./payment.js";
 
 const app = express();
 
@@ -45,6 +46,10 @@ app.get("/event-management", (req, res) => {
     res.redirect("event-management.html");
 });
 
+app.get("/ticket-booking", (req, res) => {
+    res.redirect("ticket-booking.html");
+});
+
 app.get("/payment", (req, res) => {
     res.redirect("payment.html");
 });
@@ -68,6 +73,8 @@ app.get("/user-forgot-password", (req, res) => {
 app.use("/auth", login);
 
 app.use("/event", event);
+
+app.use("/payment", payment);
 
 app.listen(8080, () => {
     console.log("Sever started at http://127.0.0.1:8080");

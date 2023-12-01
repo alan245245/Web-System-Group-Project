@@ -2,13 +2,19 @@ $().ready(() => {
     console.log("ready");
     const urlParams = new URLSearchParams(window.location.search);
     const trainNumber = urlParams.get("trainNumber");
-    if (trainNumber == null || trainNumber == "") {
-        alert("Please go to Event Dashboard to choose a train shift first.");
-        window.open("event-dashboard.html", "_self");
-    }
     var selectedSeat = [];
     var price = 0;
     $.post("event/getEventByTrainNumber", { trainNumber: trainNumber }, function (response) {
+        $.get("event/checkLogin", function (response) {
+            const res = JSON.parse(response);
+            if (res.status != "success") {
+                alert("Please login or register before buying ticket.");
+                window.open("event-dashboard.html", "_self");
+            }
+        }).fail(function (response) {
+            alert("Please login or register before buying ticket.");
+            window.open("event-dashboard.html", "_self");
+        });
         const res = JSON.parse(response);
         console.log(res);
         const dt = new Date(parseInt(res.event.departureTime));
@@ -18,10 +24,11 @@ $().ready(() => {
         );
         drawSeats(res.event.row, res.event.column, res.event.occupiedSeats, res.event.firstClass);
         $("#confirm").on("click", function () {
-            window.open(
-                `payment.html?trainNumber=${res.event.trainNumber}&selectedSeat=${selectedSeat}&price=${price}`,
-                "_self"
-            );
+            var selectedSeatQS = "";
+            selectedSeat.forEach((element) => {
+                selectedSeatQS += `selectedSeat=${element}&`;
+            });
+            window.open(`payment.html?trainNumber=${res.event.trainNumber}&${selectedSeatQS}price=${price}`, "_self");
         });
         $("#reset").on("click", function () {
             selectedSeat = [];
@@ -1602,8 +1609,9 @@ $().ready(() => {
         });
     }).fail(function (response) {
         const jsonObject = JSON.parse(response.responseJSON);
-        if (jsonObject.status == "failed" && jsonObject.message != "") {
-            alert(`${jsonObject.message}`);
+        if (jsonObject.status == "failed") {
+            alert("Train Number is missing.");
+            window.open("event-dashboard.html", "_self");
         } else {
             alert(`An unknown error has occured`);
         }
