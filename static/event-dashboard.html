@@ -77,10 +77,23 @@
                 </div>
             </div>
         </nav>
-        <div class="container pb-5" id="event-container">
-            <!--
+        <div class="table-responsive-sm">
+            <table class="table pb-5">
+                <!--
                 events will append here in event-dashboard.js
-            -->
+                -->
+                <thead>
+                    <tr>
+                        <th class="col">Train Number</th>
+                        <th class="col">Departure Time</th>
+                        <th class="col">Commute Time</th>
+                        <th class="col">Arrival Time</th>
+                        <th class="col">Price</th>
+                        <th class="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody id="event-container"></tbody>
+            </table>
         </div>
         <button
             type="button"
