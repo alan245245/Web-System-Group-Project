@@ -36,7 +36,13 @@ $(document).ready(function () {
         $("#departureTime").html(
             `${dt.getHours() < 10 ? "0" : ""}${dt.getHours()}:${dt.getMinutes() < 10 ? "0" : ""}${dt.getMinutes()}`
         );
-        $("#selectedSeat").html(selectedSeat);
+        for (i = 0; i < selectedSeat.length; i++) {
+            if (i == 0) {
+                $("#selectedSeat").append(selectedSeat[i]);
+            } else {
+                $("#selectedSeat").append(", " + selectedSeat[i]);
+            }
+        }
         $("#price").html(price);
         $("#submit").on("click", function () {
             const cardID = $("#card-id").val();
