@@ -2,6 +2,7 @@ import express, { Router, json } from "express";
 import multer from "multer";
 import fs from "fs/promises";
 import users from "./userdb.js";
+import path from "path";
 
 const app = express();
 const route = Router();
