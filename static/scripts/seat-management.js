@@ -103,6 +103,8 @@ function drawSeats(row, col, occupiedSeats = "", firstClass = "") {
     const ns = "http://www.w3.org/2000/svg";
     const svg = document.getElementById("seat-map");
 
+    $("seat-map").empty();
+
     for (i = 0; i < row; i++) {
         // Will sweep through X-axis
         for (y = 0; y < col; y++) {
