@@ -105,4 +105,4 @@ app.listen(8080, () => {
     console.log("Sever started at http://127.0.0.1:8080");
 });
 
-app.use("/", express.static("static"));
+app.use("/", express.static(path.join(process.cwd(), "/static")));
