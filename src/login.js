@@ -68,7 +68,7 @@ route.post("/register", form.any(), async (req, res) => {
         if (file.length != 0) fs.unlink(file[0].path);
     } else {
         try {
-            users.update_user(firstName, lastName, gender, birthday, username, password, email, filePath, false);
+            users.update_user(firstName, lastName, gender, birthday, username, password, email, false, filePath);
             res.json(JSON.stringify({ status: "success", username: username }));
         } catch (err) {
             res.status(400).json(
