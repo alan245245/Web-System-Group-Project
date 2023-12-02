@@ -109,4 +109,25 @@ async function createEvents(
     }
 }
 
-export default { getAllEvents, createEvents, getEventByTrainNumber };
+async function updateEventSeat(trainNumber, row, column) {
+    try {
+        const events = client.db("projectdb").collection("event");
+        console.log(row, column);
+
+        const result = await events.updateOne(
+            { trainNumber: trainNumber },
+            {
+                $set: {
+                    row: row,
+                    column: column,
+                },
+            }
+        );
+        console.log(result);
+        return result;
+    } catch (err) {
+        console.log(`ERROR: Unable to insert event. ${err}`);
+    }
+}
+
+export default { getAllEvents, createEvents, getEventByTrainNumber, updateEventSeat };

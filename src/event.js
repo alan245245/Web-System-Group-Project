@@ -54,6 +54,23 @@ route.post("/createEvent", async (req, res) => {
     }
 });
 
+// Route to create event
+route.post("/updateEventSeats", async (req, res) => {
+    const trainNumber = req.body.trainNumber;
+    const row = req.body.row;
+    const column = req.body.column;
+
+    const result = await eventdb.updateEventSeat(trainNumber, row, column);
+
+    // If insertedId contain data, the operation is success
+    console.log(result.upsertedCountId);
+    if (result.upsertedCountId != 0) {
+        res.json(JSON.stringify({ status: "success" }));
+    } else {
+        res.status(400).json(JSON.stringify({ status: `failed`, reason: result.reason }));
+    }
+});
+
 route.post("/getEventByTrainNumber", async (req, res) => {
     const event = await eventdb.getEventByTrainNumber(req.body.trainNumber);
     if (event) {

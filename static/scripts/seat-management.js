@@ -1,3 +1,97 @@
+$.when($(document).ready).then(function () {
+    $.post(
+        "event/getAllEvents",
+        {},
+        function (response) {
+            const jsonObject = JSON.parse(response);
+            console.log(jsonObject);
+            for (i = 0; i < jsonObject.events.length; i++) {
+                let dt = new Date(parseInt(jsonObject.events[i].departureTime));
+                let at = new Date(parseInt(jsonObject.events[i].arriveTime));
+                $("#train-id").append(`
+                        <option value="${jsonObject.events[i].trainNumber}">${jsonObject.events[i].trainNumber}</option>
+                `);
+            }
+        },
+        "json"
+    ).fail(function (response) {
+        const jsonObject = JSON.parse(response.responseJSON);
+        if (jsonObject.status == "failed" && jsonObject.message != "") {
+            alert(`${jsonObject.message}`);
+        } else {
+            alert(`An unknown error has occured`);
+        }
+    });
+
+    $("#train-id").on("change", () => {
+        const queryTrainNumber = $("#train-id").val();
+        $.post(
+            "event/getEventByTrainNumber",
+            { trainNumber: queryTrainNumber },
+            function (response) {
+                const jsonObject = JSON.parse(response);
+                drawSeats(
+                    parseInt(jsonObject.event.row),
+                    parseInt(jsonObject.event.column),
+                    jsonObject.event.occupiedSeats,
+                    jsonObject.event.firstClass
+                );
+            },
+            "json"
+        ).fail(function (response) {
+            const jsonObject = JSON.parse(response.responseJSON);
+            if (jsonObject.status == "failed" && jsonObject.message != "") {
+                alert(`${jsonObject.message}`);
+            } else {
+                alert(`An unknown error has occured`);
+            }
+        });
+    });
+});
+
+function edit(event) {
+    const queryTrainNumber = $("#train-id").val();
+    const row = $("#row").val();
+    const column = $("#col").val();
+    event.preventDefault();
+
+    if (row < 0) {
+        alert("Row cannot be negative");
+        return;
+    } else if (row == "") {
+        alert("Row cannot be empty");
+        return;
+    } else if (column == "") {
+        alert("Column cannot be empty");
+        return;
+    } else if (column < 0) {
+        alert("Column cannot be negative");
+        return;
+    }
+
+    $.post(
+        "event/updateEventSeats",
+        { trainNumber: queryTrainNumber, row: row, column: column },
+        function (response) {
+            const jsonObject = JSON.parse(response);
+            if (jsonObject.status == "success") {
+                alert("Updated successfully");
+                window.location.reload();
+            } else {
+                alert("Update failed");
+            }
+        },
+        "json"
+    ).fail(function (response) {
+        const jsonObject = JSON.parse(response.responseJSON);
+        if (jsonObject.status == "failed" && jsonObject.message != "") {
+            alert(`${jsonObject.message}`);
+        } else {
+            alert(`An unknown error has occured`);
+        }
+    });
+}
+
 function drawSeats(row, col, occupiedSeats = "", firstClass = "") {
     let seatNumber = 1;
     let heightSVG = 500;

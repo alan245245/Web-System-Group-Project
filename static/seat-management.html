@@ -30,7 +30,7 @@
     </head>
     <style>
         .available-seat {
-            fill: green;
+            fill: rgb(0, 186, 0);
             stroke-width: 1;
             stroke: black;
             cursor: pointer;
@@ -40,6 +40,18 @@
             stroke-width: 1;
             stroke: black;
             cursor: not-allowed;
+        }
+        .first-available {
+            fill: yellow;
+            stroke-width: 1;
+            stroke: black;
+            cursor: pointer;
+        }
+        .selecting-seat {
+            fill: rgb(77, 77, 255);
+            stroke-width: 1;
+            stroke: black;
+            cursor: pointer;
         }
         .seat-number {
             pointer-events: none;
@@ -87,22 +99,9 @@
                             <div class="col-auto d-block d-md-flex py-2">
                                 <label for="train-id">Select a Train Route: </label>
                                 <select class="form-select" style="width: 12rem" aria-label="Train ID" id="train-id">
-                                    <option selected value="A001">A001</option>
-                                    <option value="A002">A002</option>
+                                    <option selected value="null">Please Select</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="col d-block d-md-flex py-2">
-                            <label for="seat-type">Select Seat Class:</label>
-                            <select
-                                class="form-select"
-                                style="width: 12rem"
-                                aria-label="Standard Seat"
-                                id="seat-type"
-                                name="seat-type">
-                                <option selected value="standard">Standard Seat</option>
-                                <option value="first-class">First Class Seat</option>
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -130,10 +129,23 @@
                             -->
                             <div class="row py-3 card-text justify-content-center align-items-end">
                                 <div class="col-auto">
-                                    <svg width="250" height="250" id="seat-map"></svg>
+                                    <svg width="250" height="500" id="seat-map"></svg>
                                 </div>
                                 <div class="col-auto">
-                                    <button class="btn btn-primary">Edit</button>
+                                    <form>
+                                        <label for="row">Row: </label>
+                                        <input class="my-2" type="text" id="row" name="row" style="width: 3rem" />
+                                        <br />
+                                        <label for="col">Column: </label>
+                                        <input class="my-2" type="text" id="col" name="col" style="width: 3rem" />
+                                    </form>
+                                    <button
+                                        type="submit"
+                                        id="submitBtn"
+                                        onclick="edit(event)"
+                                        class="btn btn-success my-2">
+                                        Edit
+                                    </button>
                                 </div>
                             </div>
                         </div>
