@@ -1,4 +1,24 @@
 $(document).ready(function () {
+    if (getCookie("isAdmin") == "true") {
+        console.log("done");
+        $("#append-nav").append(`
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Admin Only
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="seat-management">Seat Management</a></li>
+                                <li><a class="dropdown-item" href="event-management">Event Management</a></li>
+                                <li><a class="dropdown-item" href="#">User Account Management</a></li>
+                            </ul>
+                        </li>`);
+    }
+
     if (getCookie("username") == "") {
         // Highlight sign in if the page is user-login
         const signInLink = `<li class="nav-item">
@@ -13,7 +33,6 @@ $(document).ready(function () {
                               window.location.pathname == "/user-registration.html" ? "active" : ""
                           }" aria-current="page" href="user-registration">Register</a>
                         </li>`;
-
         $("#nav-user").append(`${signInLink}${registerLink}`);
     } else {
         $("#nav-user").append(
