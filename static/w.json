@@ -1,0 +1,16 @@
+{
+    "_id": { "$oid": "656ba8cb426b248c8f6113e6" },
+    "eventNumber": { "$numberInt": "3" },
+    "departureTime": "1703894400000",
+    "arrivalTime": "1703896800000",
+    "trainNumber": "A003",
+    "title": "Train A003 from Guangzhou to Hong Kong",
+    "origin": "Guangzhou",
+    "destination": "Hong Kong",
+    "occupiedSeats": [],
+    "priceEconomic": "100",
+    "priceFirst": "150",
+    "row": { "$numberInt": "10" },
+    "column": { "$numberInt": "4" },
+    "firstClass": [{ "$numberInt": "1" }, { "$numberInt": "2" }, { "$numberInt": "3" }, { "$numberInt": "4" }]
+}

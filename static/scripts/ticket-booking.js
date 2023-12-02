@@ -57,9 +57,9 @@ $().ready(() => {
                     $(this).removeClass("first-available");
                     selectedSeat.push(parseInt($(this).attr("id")));
                     if (res.event.firstClass.includes(parseInt($(this).attr("id")))) {
-                        price += res.event.priceFirst;
+                        price += parseInt(res.event.priceFirst);
                     } else {
-                        price += res.event.priceEconomic;
+                        price += parseInt(res.event.priceEconomic);
                     }
                 } else if ($(this).attr("class") == "selecting-seat") {
                     if (res.event.firstClass.includes(parseInt($(this).attr("id")))) {
@@ -73,9 +73,9 @@ $().ready(() => {
                         selectedSeat.splice(index, 1); // 2nd parameter means remove one item only
                     }
                     if (res.event.firstClass.includes(parseInt($(this).attr("id")))) {
-                        price -= res.event.priceFirst;
+                        price -= parseInt(res.event.priceFirst);
                     } else {
-                        price -= res.event.priceEconomic;
+                        price -= parseInt(res.event.priceEconomic);
                     }
                 }
                 if (selectedSeat.length == 0) {

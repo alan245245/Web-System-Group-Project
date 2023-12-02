@@ -40,7 +40,7 @@ $().ready(() => {
                                 jsonObject.events[i].occupiedSeats.length
                             }</span>
                             <button
-                                id = "${jsonObject.events[i].trainNumber}-buy"
+                                id = "${jsonObject.events[i].trainNumber}"
                                 class="btn btn-primary"
                                 style="--bs-btn-padding-y: 0.05rem; --bs-btn-padding-x: 0.5rem; --bs-btn-font-size: 0.75rem">
                                 Buy Ticket
@@ -49,32 +49,21 @@ $().ready(() => {
                         
                     </tr>
                 `);
+                $(`#${jsonObject.events[i].trainNumber}`).on("click", function () {
+                    //check logged
+                    const trainNumber = $(this).attr("id");
+                    $.get("event/checkLogin", function (response) {
+                        const res = JSON.parse(response);
+                        if (res.status == "success") {
+                            window.open(`ticket-booking.html?trainNumber=${trainNumber}`, "_self");
+                        } else {
+                            alert("Please login or register before buying ticket.");
+                        }
+                    }).fail(function (response) {
+                        alert("Please login or register before buying ticket.");
+                    });
+                });
             }
-            $("#A001-buy").on("click", function () {
-                //check logged
-                $.get("event/checkLogin", function (response) {
-                    const res = JSON.parse(response);
-                    if (res.status == "success") {
-                        window.open("ticket-booking.html?trainNumber=A001", "_self");
-                    } else {
-                        alert("Please login or register before buying ticket.");
-                    }
-                }).fail(function (response) {
-                    alert("Please login or register before buying ticket.");
-                });
-            });
-            $("#A002-buy").on("click", function () {
-                $.get("event/checkLogin", function (response) {
-                    const res = JSON.parse(response);
-                    if (res.status == "success") {
-                        window.open("ticket-booking.html?trainNumber=A002", "_self");
-                    } else {
-                        alert("Please login or register before buying ticket.");
-                    }
-                }).fail(function (response) {
-                    alert("Please login or register before buying ticket.");
-                });
-            });
         },
         "json"
     ).fail(function (response) {
