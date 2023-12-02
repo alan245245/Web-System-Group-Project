@@ -26,6 +26,23 @@ app.use(
     })
 );
 
+//http://127.0.0.1:8080/?authkey=Muppet5-Thee9-Deface0-Divorcee4-Sinless4
+
+const PREAUTH_KEY = "Muppet5-Thee9-Deface0-Divorcee4-Sinless4";
+app.use((req, res, next) => {
+    if (!req.session?.allow_access) {
+        if (req.query?.authkey === PREAUTH_KEY) {
+            req.session.allow_access = true;
+        } else {
+            res.status(401).json({
+                status: "failed",
+                message: "Unauthorized",
+            });
+        }
+    }
+    next();
+});
+
 /*
     Add various js and css file to website
 */
