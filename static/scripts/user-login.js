@@ -19,8 +19,8 @@ $(document).ready(() => {
                 function (response) {
                     const jsonObject = JSON.parse(response);
                     if (jsonObject.status == "success") {
-                        setCookie("username", jsonObject.username, 60);
-                        setCookie("isAdmin", jsonObject.isAdmin, 60);
+                        setCookie("username", jsonObject.username, 60 * 30);
+                        setCookie("isAdmin", jsonObject.isAdmin, 60 * 30);
                         // Implement remember password function
                         if (document.querySelector("#user-rememberme").checked) {
                             localStorage.setItem("username", username);

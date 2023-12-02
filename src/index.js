@@ -17,7 +17,7 @@ app.use(
         secret: "eie4432_groupproject",
         resave: false,
         saveUninitialized: false,
-        cookie: { httpOnly: true, maxAge: 120000 },
+        cookie: { httpOnly: true, maxAge: 30 * 60 * 1000 }, // Valid for thirty minutes
         store: mongostore.create({
             client,
             dbName: "projectdb",
@@ -43,7 +43,11 @@ app.get("/event-dashboard", (req, res) => {
 });
 
 app.get("/event-management", (req, res) => {
-    res.redirect("event-management.html");
+    if (req.session.isAdmin) {
+        res.redirect("event-management.html");
+    } else {
+        res.status(401).json(JSON.stringify({ status: "failed", message: "Unauthorized" }));
+    }
 });
 
 app.get("/ticket-booking", (req, res) => {
@@ -55,7 +59,11 @@ app.get("/payment", (req, res) => {
 });
 
 app.get("/seat-management", (req, res) => {
-    res.redirect("seat-management.html");
+    if (req.session.isAdmin) {
+        res.redirect("seat-management.html");
+    } else {
+        res.status(401).json(JSON.stringify({ status: "failed", message: "Unauthorized" }));
+    }
 });
 
 app.get("/user-login", (req, res) => {

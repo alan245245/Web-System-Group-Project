@@ -23,7 +23,7 @@ route.post("/login", async (req, res) => {
     if (user) {
         req.session.logged = true;
         req.session.username = user.username;
-        req.session.role = user.role;
+        req.session.isAdmin = user.isAdmin;
         req.session.timestamp = new Date();
         res.json(JSON.stringify({ status: "success", username: user.username, isAdmin: user.isAdmin }));
     } else {

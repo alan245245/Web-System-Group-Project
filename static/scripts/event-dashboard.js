@@ -1,11 +1,9 @@
 $().ready(() => {
-    console.log("ready");
     $.post(
         "event/getAllEvents",
         {},
         function (response) {
             const jsonObject = JSON.parse(response);
-            console.log(jsonObject);
             for (i = 0; i < jsonObject.events.length; i++) {
                 let dt = new Date(parseInt(jsonObject.events[i].departureTime));
                 let at = new Date(parseInt(jsonObject.events[i].arriveTime));
