@@ -120,7 +120,7 @@ function drawSeats(row, col, occupiedSeats = "", firstClass = "") {
     let widthSVG = 250;
     let startX = 0,
         startY = 0;
-    const gapX = widthSVG / (col + 1);
+    const gapX = widthSVG / (parseInt(col) + 1);
     const gapY = heightSVG / row;
     const ns = "http://www.w3.org/2000/svg";
     const svg = document.getElementById("seat-map");
