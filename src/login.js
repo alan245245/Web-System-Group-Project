@@ -2,20 +2,16 @@ import express, { Router, json } from "express";
 import multer from "multer";
 import fs from "fs/promises";
 import users from "./userdb.js";
-import path from "path";
 
 const app = express();
 const route = Router();
-/*
 var storage = multer.diskStorage({
-    destination: path.join(process.cwd(), "./upload/user/path"),
+    destination: "./upload/user/path",
     filename: (req, file, cb) => {
         cb(null, Date.now() + "-" + file.originalname);
     },
 });
-*/
-//const form = multer({ storage: storage });
-const form = multer();
+const form = multer({ storage: storage });
 
 //let users = new Map();
 
