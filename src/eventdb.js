@@ -130,4 +130,21 @@ async function updateEventSeat(trainNumber, row, column) {
     }
 }
 
-export default { getAllEvents, createEvents, getEventByTrainNumber, updateEventSeat };
+async function getSeatOwner(trainNumber, seatNumber) {
+    try {
+        const events = client.db("projectdb").collection("event");
+        const transaction = client.db("projectdb").collection("transaction");
+
+        const eventResult = await events.findOne({ trainNumber: trainNumber });
+
+        const eventNumber = eventResult.eventNumber;
+        const querySeatNumber = [parseInt(seatNumber)];
+        const result = await transaction.findOne({ eventNumber: eventNumber, selectedSeats: { $in: querySeatNumber } });
+
+        return result;
+    } catch (err) {
+        console.log(`ERROR: Unable to query event. ${err}`);
+    }
+}
+
+export default { getAllEvents, createEvents, getEventByTrainNumber, updateEventSeat, getSeatOwner };

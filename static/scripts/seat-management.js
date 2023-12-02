@@ -49,7 +49,25 @@ $.when($(document).ready).then(function () {
     });
 
     $("#seat-map").on("click", (event) => {
-        console.log(event.target.id);
+        const queryTrainNumber = $("#train-id").val();
+        $.post(
+            "event/getSeatOwner",
+            { trainNumber: queryTrainNumber, seatNumber: event.target.id },
+            function (response) {
+                const jsonObject = JSON.parse(response);
+                console.log(jsonObject.username);
+                $("#selected-seat").text(event.target.id);
+                $("#seat-owner").text(jsonObject.username);
+            },
+            "json"
+        ).fail(function (response) {
+            const jsonObject = JSON.parse(response.responseJSON);
+            if (jsonObject.status == "failed" && jsonObject.message != "") {
+                alert(`${jsonObject.message}`);
+            } else {
+                alert(`An unknown error has occured`);
+            }
+        });
     });
 });
 

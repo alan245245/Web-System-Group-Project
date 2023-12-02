@@ -69,6 +69,19 @@ route.post("/updateEventSeats", async (req, res) => {
     }
 });
 
+route.post("/getSeatOwner", async (req, res) => {
+    const trainNumber = req.body.trainNumber;
+    const seatNumber = req.body.seatNumber;
+
+    const result = await eventdb.getSeatOwner(trainNumber, seatNumber);
+
+    if (result) {
+        res.json(JSON.stringify(result));
+    } else {
+        res.status(400).json(JSON.stringify({ status: `failed`, message: "Selected seat do not have a owner" }));
+    }
+});
+
 route.post("/getEventByTrainNumber", async (req, res) => {
     const event = await eventdb.getEventByTrainNumber(req.body.trainNumber);
     if (event) {
