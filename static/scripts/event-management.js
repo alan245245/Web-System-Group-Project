@@ -135,7 +135,7 @@ function validateEvent(event) {
     // Try to obtain date for departure
     try {
         ele = $("#event-departure");
-        departureTime = ele.val();
+        departureTime = new Date(ele.val()).getTime();
 
         if (!departureTime) {
             // Invalid: Departure is empty
@@ -152,7 +152,7 @@ function validateEvent(event) {
     // Try to obtain date for arrive
     try {
         ele = $("#event-arrival");
-        arrivalTime = ele.val();
+        arrivalTime = new Date(ele.val()).getTime();
 
         if (!arrivalTime) {
             // Invalid: Arrive is empty

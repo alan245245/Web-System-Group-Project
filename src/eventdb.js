@@ -89,18 +89,24 @@ async function createEvents(
     try {
         const events = client.db("projectdb").collection("event");
 
+        const eventNumber = parseInt(await events.countDocuments()) + 1;
+        const occupiedSeats = [];
+        const firstClass = [1, 2, 3, 4];
+
         const result = await events.insertOne({
+            eventNumber: eventNumber,
+            departureTime: departureTime,
+            arrivalTime: arrivalTime,
+            trainNumber: trainNumber,
             title: title,
             origin: origin,
             destination: destination,
+            occupiedSeats: occupiedSeats,
             priceEconomic: priceEconomic,
             priceFirst: priceFirst,
-            trainNumber: trainNumber,
-            departureTime: departureTime,
-            arrivalTime: arrivalTime,
-            description: description,
             row: 10,
             column: 4,
+            firstClass: firstClass,
         });
 
         return result;

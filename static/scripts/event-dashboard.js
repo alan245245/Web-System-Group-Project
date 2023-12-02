@@ -6,7 +6,7 @@ $().ready(() => {
             const jsonObject = JSON.parse(response);
             for (i = 0; i < jsonObject.events.length; i++) {
                 let dt = new Date(parseInt(jsonObject.events[i].departureTime));
-                let at = new Date(parseInt(jsonObject.events[i].arriveTime));
+                let at = new Date(parseInt(jsonObject.events[i].arrivalTime));
                 $("#event-container").append(`
                     <tr>
                         <th scope="row">${jsonObject.events[i].trainNumber}
