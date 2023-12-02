@@ -110,9 +110,7 @@ route.post("/forgot-password", async (req, res) => {
 route.get("/me", async (req, res) => {
     if (req.session.logged) {
         const curuser = await users.fetch_user(req.session.username);
-        res.json(
-            JSON.stringify({ status: "success", user: { username: `${curuser.username}`, role: `${curuser.role}` } })
-        );
+        res.json(JSON.stringify({ status: "success", curuser }));
     } else {
         res.status(401).json(JSON.stringify({ status: "failed", message: "Unauthorized" }));
     }

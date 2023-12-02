@@ -21,7 +21,7 @@ $(document).ready(function () {
             <i class="bi bi-person-circle"></i>
             ${getCookie("username")} </a>
             <ul class="dropdown-menu dropdown-menu-end"> 
-            <li><a class="dropdown-item" href="#">User Account Management</a></li> 
+            <li><a class="dropdown-item" href="user-account.html">User Account Management</a></li> 
             <li> <a class="dropdown-item" id="logout" method="POST" href="#"><i class="bi bi-box-arrow-right"></i> Logout</a> </li> 
             </ul>`
         );
