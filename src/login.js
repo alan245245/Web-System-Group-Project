@@ -6,7 +6,7 @@ import users from "./userdb.js";
 const app = express();
 const route = Router();
 var storage = multer.diskStorage({
-    destination: "./upload/user/path",
+    destination: path.join(process.cwd(), "./upload/user/path"),
     filename: (req, file, cb) => {
         cb(null, Date.now() + "-" + file.originalname);
     },
