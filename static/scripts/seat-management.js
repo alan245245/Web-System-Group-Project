@@ -47,6 +47,10 @@ $.when($(document).ready).then(function () {
             }
         });
     });
+
+    $("#seat-map").on("click", (event) => {
+        console.log(event.target.id);
+    });
 });
 
 function edit(event) {

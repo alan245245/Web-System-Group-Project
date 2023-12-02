@@ -54,7 +54,7 @@ route.post("/createEvent", async (req, res) => {
     }
 });
 
-// Route to create event
+// Route to update seats for event
 route.post("/updateEventSeats", async (req, res) => {
     const trainNumber = req.body.trainNumber;
     const row = req.body.row;
@@ -62,8 +62,6 @@ route.post("/updateEventSeats", async (req, res) => {
 
     const result = await eventdb.updateEventSeat(trainNumber, row, column);
 
-    // If insertedId contain data, the operation is success
-    console.log(result.upsertedCountId);
     if (result.upsertedCountId != 0) {
         res.json(JSON.stringify({ status: "success" }));
     } else {
