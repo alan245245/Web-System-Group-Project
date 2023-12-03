@@ -2,8 +2,8 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 import config from "./config.js";
 const connect_uri = config.CONNECTION_STR;
 const client = new MongoClient(connect_uri, {
-    connectTimeoutMS: 2000,
-    serverSelectionTimeoutMS: 2000,
+    connectTimeoutMS: 20000,
+    serverSelectionTimeoutMS: 20000,
     serverApi: {
         version: ServerApiVersion.v1,
         strict: true,
