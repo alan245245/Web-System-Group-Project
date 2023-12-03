@@ -6,6 +6,7 @@ import path from "path";
 
 const app = express();
 const route = Router();
+/*
 const dest = path.join(process.cwd(), "./upload/user/path");
 var storage = multer.diskStorage({
     destination: dest,
@@ -13,7 +14,8 @@ var storage = multer.diskStorage({
         cb(null, Date.now() + "-" + file.originalname);
     },
 });
-const form = multer({ storage: storage });
+*/
+const form = multer();
 
 //let users = new Map();
 
