@@ -48,7 +48,7 @@ $().ready(() => {
             $("#selected-seat").html("Click a seat to book.");
             $("#price").html(price);
         });
-        for (i = 1; i < res.event.row * res.event.column; i++) {
+        for (i = 1; i <= res.event.row * res.event.column; i++) {
             $(`#${i}`).on("click", function () {
                 if ($(this).attr("class") == "booked-seat") {
                     alert("This seat is alread booked");
