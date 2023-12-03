@@ -19,6 +19,7 @@ $().ready(() => {
         console.log(res);
         const dt = new Date(parseInt(res.event.departureTime));
         $("#trainInfo").html(res.event.title);
+        $("#trainDate").html(`${dt.getFullYear()}-${parseInt(dt.getMonth()) + 1}-${dt.getDate()}`);
         $("#trainDT").html(
             `${dt.getHours() < 10 ? "0" : ""}${dt.getHours()}:${dt.getMinutes() < 10 ? "0" : ""}${dt.getMinutes()}`
         );

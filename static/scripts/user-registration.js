@@ -346,6 +346,7 @@ async function register(event) {
 
     if (jsonObject.status == "success") {
         alert(`Welcome, ${jsonObject.username}!\nYou can login with your account now!`);
+        window.location.replace("user-login");
     } else if (jsonObject.status == "failed" && jsonObject.message != "") {
         alert(`${jsonObject.message}`);
     } else {

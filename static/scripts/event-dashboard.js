@@ -12,6 +12,9 @@ $().ready(() => {
                         <th scope="row">${jsonObject.events[i].trainNumber}
                         </th>
                         <td >
+                            <div class="text-secondary">${dt.getFullYear()}-${
+                                parseInt(dt.getMonth()) + 1
+                            }-${dt.getDate()}</div>
                             <div class="text-primary">${dt.getHours() < 10 ? "0" : ""}${dt.getHours()}:${
                                 dt.getMinutes() < 10 ? "0" : ""
                             }${dt.getMinutes()}</div>
@@ -24,6 +27,9 @@ $().ready(() => {
                             <img class="" src="assets/arrow.png" width="60px" />
                         </td>
                         <td >
+                            <div class="text-secondary">${at.getFullYear()}-${
+                                parseInt(at.getMonth()) + 1
+                            }-${at.getDate()}</div>
                             <div class="text-primary">${at.getHours() < 10 ? "0" : ""}${at.getHours()}:${
                                 at.getMinutes() < 10 ? "0" : ""
                             }${at.getMinutes()}</div>
