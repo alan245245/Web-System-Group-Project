@@ -2,11 +2,13 @@ import express, { Router, json } from "express";
 import multer from "multer";
 import fs from "fs/promises";
 import users from "./userdb.js";
+import path from "path";
 
 const app = express();
 const route = Router();
+const dest = path.join(process.cwd(), "./upload/user/path");
 var storage = multer.diskStorage({
-    destination: "./upload/user/path",
+    destination: dest,
     filename: (req, file, cb) => {
         cb(null, Date.now() + "-" + file.originalname);
     },
